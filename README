@@ -1,41 +1,44 @@
 <!-- README.md -->
+
 # QKSS MAP
 
 Simple Pin Viewer Webpage for creating and viewing geolocated news. The main dashboard shows the latest accident reports happening across Kosovo.
 
 ## Table of Contents
 
-- [Features](#features)  
-- [Tech Stack](#tech-stack)  
-- [Installation](#installation)  
-- [Usage](#usage)  
-- [Configuration](#configuration)  
-- [Contributing](#contributing)  
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
 - [License](#license)
 
 ## Features
 
-- 📍 Display latest accident news as map pins  
-- 🔎 Clickable markers with title and “Read more” links  
-- 📋 Sidebar list view of all pins  
-- 🌐 Responsive layout with Bootstrap  
+- 📍 Display latest accident news as map pins
+- 🔎 Clickable markers with title and “Read more” links
+- 📋 Sidebar list view of all pins
+- 🌐 Responsive layout with Bootstrap
 - 🏳️ Language switcher (EN/SQ/SR)
 
 ## Tech Stack
 
-- **Frontend**: HTML, JavaScript, [Bootstrap 5](https://getbootstrap.com/)  
-- **Backend**: Java Spring Boot REST API  
-- **API Base URL**: `https://imap.qkss.org/api/`  
+- **Frontend**: HTML, JavaScript, [Bootstrap 5](https://getbootstrap.com/)
+- **Backend**: Java Spring Boot REST API
+- **API Base URL**: `https://imap.qkss.org/api/`
 
 ## Installation
 
-1. **Clone the repo**  
+1. **Clone the repo**
    ```bash
    git clone https://github.com/festimii/QKSS.git
    cd QKSS
+   ```
 2. **Build Backend**
    ./mvnw clean package
    java -jar target/map-0.0.1-SNAPSHOT.jar
 
 # AUTHORS
+
 - QKSS Development Team
