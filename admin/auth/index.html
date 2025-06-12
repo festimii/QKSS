@@ -64,7 +64,7 @@
 
         const token = await res.text();
         sessionStorage.setItem("jwt_token", token);
-        window.location.href = "admin.html";
+        window.location.href = "../"; // Redirect to admin page
       });
     }
   });

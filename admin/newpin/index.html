@@ -31,7 +31,7 @@
 <body>
   <nav class="navbar sticky-top navbar-expand-lg  navbar-dark bg-dark mb-4">
     <div class="container-fluid">
-      <a class="navbar-brand" href="admin.html">🗺 Pin Admin</a>
+      <a class="navbar-brand" href="../admin/">🗺 Pin Admin</a>
       <div class="d-flex align-items-center gap-2 ms-auto">
         <!-- Language switcher (if needed) -->
         <select id="languageSwitcher" class="form-select form-select-sm w-auto">
@@ -49,7 +49,7 @@
   <script>
     function logout() {
       sessionStorage.removeItem("jwt_token");
-      window.location.href = "login.html";
+      window.location.href = "../admin/auth/";
     }
   </script>
 
@@ -114,7 +114,7 @@
       <!-- Submit + Back -->
       <div class="col-12" style="padding-bottom: 10px;">
         <button type="submit" class="btn btn-success">Submit</button>
-        <a href="admin.html" class="btn btn-secondary ms-2">⬅ Back</a>
+        <a href="../" class="btn btn-secondary ms-2">⬅ Back</a>
       </div>
     </form>
   </div>
@@ -138,7 +138,7 @@
     const API_BASE_URL = "http://49.12.75.177:8082/api/pins";
     const token = sessionStorage.getItem("jwt_token");
     if (!token) {
-      window.location.href = "login.html";
+      window.location.href = "../admin/auth/"; // Redirect to login if no token
     }
 
     // Initialize Leaflet map
@@ -244,7 +244,7 @@
 
         if (res.ok) {
           alert("✅ Pin created!");
-          window.location.href = "admin.html";
+          window.location.href = "../";
           return;
         }
 
