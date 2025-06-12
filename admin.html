@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin - Manage Pins</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    crossorigin="anonymous"
+  />
+  <style>
+    body { padding-top: 5rem; }
+    table td { vertical-align: middle; }
+    #alertContainer {
+      position: fixed;
+      top: 4rem; /* just below the fixed navbar */
+      right: 1rem;
+      width: 300px;
+      z-index: 1050;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">🗺 Map Admin</a>
+      <div class="d-flex ms-auto align-items-center gap-2">
+        <select id="languageSwitcher" class="form-select form-select-sm w-auto">
+          <option value="en">EN</option>
+          <option value="sq">SQ</option>
+          <option value="sr">SR</option>
+        </select>
+        <button class="btn btn-outline-light btn-sm" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Alert container (for Bootstrap alerts) -->
+  <div id="alertContainer"></div>
+
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="mb-0">Manage Map Pins</h2>
+      <a href="create.html" class="btn btn-dark"> Create New Pin</a>
+    </div>
+
+    <!-- Pins Table -->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Lat</th>
+          <th>Lng</th>
+          <th>URL</th>
+          <th style="width:100px">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="pinTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Bootstrap JS Bundle (for alerts and dismiss) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"
+  ></script>
+
+
+
+  <script>
+    const API_BASE_URL = "http://49.12.75.177:8082/api/pins";
+
+    function getLang() {
+      return localStorage.getItem("lang") || "en";
+    }
+
+    // Initialize language switcher
+    document.getElementById("languageSwitcher").value = getLang();
+    document.getElementById("languageSwitcher").addEventListener("change", (e) => {
+      localStorage.setItem("lang", e.target.value);
+      location.reload();
+    });
+
+    /**
+     * Show a Bootstrap alert in the top‐right corner of the screen.
+     * type: "success", "danger", "warning", or "info"
+     * msg: the message string (HTML‐escaped)
+     */
+    function showAlert(type, msg) {
+      const container = document.getElementById("alertContainer");
+
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+          ${msg}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      `;
+      container.appendChild(wrapper);
+
+      // Auto‐dismiss after 5 seconds
+      setTimeout(() => {
+        const alertNode = bootstrap.Alert.getOrCreateInstance(wrapper.querySelector(".alert"));
+        alertNode.close();
+      }, 5000);
+    }
+
+    async function validateToken() {
+      const token = sessionStorage.getItem("jwt_token");
+      if (!token) return false;
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/admin/test`, {
+          method: "GET",
+          headers: { "Authorization": `Bearer ${token}` }
+        });
+        return res.ok;
+      } catch (err) {
+        // Network or other error
+        return false;
+      }
+    }
+
+    // ⛔️ Redirect to login if token is missing or invalid
+    validateToken().then(isValid => {
+      if (!isValid) {
+        sessionStorage.removeItem("jwt_token");
+        window.location.href = "login.html";
+      }
+    });
+
+    function logout() {
+      sessionStorage.removeItem("jwt_token");
+      window.location.href = "login.html";
+    }
+
+    async function getToken() {
+      const token = sessionStorage.getItem("jwt_token");
+      if (!token) {
+        throw new Error("No token found");
+      }
+      return token;
+    }
+
+    async function fetchPins() {
+      let pins;
+      try {
+        const res = await fetch(`${API_BASE_URL}`);
+        pins = await res.json();
+      } catch (err) {
+        showAlert("danger", "Failed to fetch pins.");
+        return;
+      }
+
+      const tbody = document.getElementById("pinTableBody");
+      tbody.innerHTML = "";
+      const lang = getLang();
+
+      pins.forEach(pin => {
+        // Determine localized title:
+        let titleText;
+        if (pin.title && typeof pin.title === "object") {
+          if (pin.title[lang]) {
+            titleText = pin.title[lang];
+          } else if (pin.title.en) {
+            titleText = pin.title.en;
+          } else {
+            // fallback to first available translation:
+            const firstVal = Object.values(pin.title).find(v => typeof v === "string");
+            titleText = firstVal || "(no title)";
+          }
+        } else {
+          // if pin.title is a plain string or missing:
+          titleText = pin.title || "(no title)";
+        }
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${titleText}</td>
+          <td>${pin.lat}</td>
+          <td>${pin.lng}</td>
+          <td><a href="${pin.articleUrl}" target="_blank">Link</a></td>
+          <td>
+            <button class="btn btn-danger btn-sm" onclick="deletePin('${pin.id}')">
+              Delete
+            </button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    async function deletePin(id) {
+      let token;
+      try {
+        token = await getToken();
+      } catch (err) {
+        showAlert("warning", "You must be logged in to delete a pin.");
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/admin/${id}`, {
+          method: "DELETE",
+          headers: { "Authorization": `Bearer ${token}` }
+        });
+
+        if (res.ok) {
+          showAlert("success", "Pin deleted.");
+          fetchPins();
+        } else if (res.status === 401) {
+          showAlert("danger", "Unauthorized. Please log in again.");
+          sessionStorage.removeItem("jwt_token");
+          setTimeout(() => window.location.href = "login.html", 1000);
+        } else if (res.status === 403) {
+          showAlert("danger", "Forbidden. You do not have permission to delete this pin.");
+        } else {
+          showAlert("danger", `Failed to delete pin (status ${res.status}).`);
+        }
+      } catch (err) {
+        console.error(err);
+        showAlert("danger", "Network error while deleting pin.");
+      }
+    }
+
+    window.onload = fetchPins;
+  </script>
+
+  <noscript>
+    <meta http-equiv="refresh" content="0;url=login.html">
+  </noscript>
+</body>
+</html>

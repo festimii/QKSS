@@ -1,0 +1,74 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Login</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #f8f9fa;
+    }
+    .login-box {
+      padding: 2rem;
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h4 class="mb-4 text-center">Admin Login</h4>
+    <form id="loginForm">
+      <div class="mb-3">
+        <input type="password" id="password" class="form-control" placeholder="Admin Password" required />
+      </div>
+      <button type="submit" class="btn btn-dark w-100">Login</button>
+    </form>
+  </div>
+ <script>
+  // 🔐 Block access if no token (for protected pages)
+  if (!sessionStorage.getItem("jwt_token") && window.location.pathname.includes("admin.html")) {
+    window.location.href = "login.html";
+  }
+
+  // 🧠 Run after DOM is ready
+  document.addEventListener("DOMContentLoaded", () => {
+    const API_BASE_URL = "http://49.12.75.177:8082/api/pins";
+
+    const form = document.getElementById("loginForm");
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const pw = document.getElementById("password").value;
+
+        const res = await fetch(`${API_BASE_URL}/admin/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ password: pw })
+        });
+
+        if (!res.ok) {
+          alert("Login failed");
+          return;
+        }
+
+        const token = await res.text();
+        sessionStorage.setItem("jwt_token", token);
+        window.location.href = "admin.html";
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

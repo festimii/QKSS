@@ -1,0 +1,32 @@
+/* 1. Let html/body fill the viewport */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* 2. Subtract navbar height so your map sits below it */
+  .main-layout {
+    /* Bootstrap’s default navbar is 56px tall */
+    height: calc(100vh - 56px);
+  }
+  
+  /* 3. Make the map container fill its parent */
+  #map {
+    width: 100%;
+    height: 100%;
+  }
+  
+  
+#pinList li:hover {
+    cursor: pointer;
+    background-color: #f1f1f1;
+}
+
+/* On mobile: set map height minus search bar */
+@media (max-width: 767.98px) {
+    #map {
+        height: calc(100vh - 60px - 56px);
+        /* navbar + mobile search */
+    }
+}
