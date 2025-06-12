@@ -125,14 +125,14 @@
       }
     }
 
-    // ⛔️ Redirect to login if token is missing or invalid
+    // ⛔️ Redirect to login if token is missing or invalid1
     validateToken().then(isValid => {
       if (!isValid) {
         sessionStorage.removeItem("jwt_token");
         window.location.href = "./auth/";
       }
     });
-
+ 
     function logout() {
       sessionStorage.removeItem("jwt_token");
       window.location.href = "./auth/";
