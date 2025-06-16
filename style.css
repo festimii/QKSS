@@ -59,3 +59,17 @@ body {
     --search-height: 50px; /* smaller on tiny phones */
   }
 }
+
+/* Enhanced modal styling */
+#pinModal .modal-header {
+  background-color: #f8f9fa;
+  border-bottom: none;
+}
+
+#pinModal .modal-title {
+  font-weight: 600;
+}
+
+#pinModal .modal-body .lead {
+  font-size: 1.1rem;
+}

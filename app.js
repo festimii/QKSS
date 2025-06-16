@@ -12,6 +12,7 @@ const UI_STRINGS = {
     pinDetailsTitle: "Pin Details",
     coordsLabel: "Coordinates:",
     categoryLabel: "Category:",
+    cityLabel: "Location:",
     footerText: "©2025 QKSS Map Viewer",
     navBrand: "Pin Admin",
     navLogout: "Logout",
@@ -38,6 +39,7 @@ const UI_STRINGS = {
     pinDetailsTitle: "Detajet e Pikës",
     coordsLabel: "Koordinatat:",
     categoryLabel: "Kategoria:",
+    cityLabel: "Vendndodhja:",
     footerText: "©2025 Harta QKSS",
     navBrand: "Admin Pikash",
     navLogout: "Dil",
@@ -64,6 +66,7 @@ const UI_STRINGS = {
     pinDetailsTitle: "Detalji Pin-a",
     coordsLabel: "Koordinate:",
     categoryLabel: "Kategorija:",
+    cityLabel: "Lokacija:",
     footerText: "©2025 QKSS Pregled Karte",
     navBrand: "Admin Pinova",
     navLogout: "Odjavi se",
@@ -211,9 +214,10 @@ function filterPins(query) {
 }
 
 function showPinDetails(pin) {
-  document.getElementById("pinDescription").textContent = getLocalizedDescription(pin);
-  document.getElementById("pinCoords").textContent = `${pin.lat}, ${pin.lng}`;
-  document.getElementById("pinCategory").textContent = pin.category || "N/A";
+  document.getElementById("pinDescription").textContent =
+    getLocalizedDescription(pin);
+  const cityEl = document.getElementById("pinCity");
+  if (cityEl) cityEl.textContent = pin.city || "";
   document.getElementById("pinModalTitle").textContent = getLocalizedTitle(pin);
   const readMore = document.getElementById("modalReadMore");
   if (readMore) readMore.href = `news.html?id=${pin.id}`;
@@ -299,12 +303,8 @@ function updateUIStrings() {
     .setAttribute("placeholder", u.searchPlaceholder);
 
   document.getElementById("pinModalTitle").textContent = u.pinDetailsTitle;
-  document.querySelector(
-    "#pinCoords"
-  ).previousElementSibling.firstChild.textContent = u.coordsLabel + " ";
-  document.querySelector(
-    "#pinCategory"
-  ).previousElementSibling.firstChild.textContent = u.categoryLabel + " ";
+  const cityLbl = document.getElementById("cityLabel");
+  if (cityLbl) cityLbl.textContent = u.cityLabel;
   document
     .querySelector("#pinModal .btn-close")
     .setAttribute("aria-label", u.close);
