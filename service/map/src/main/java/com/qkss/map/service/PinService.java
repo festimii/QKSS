@@ -19,6 +19,11 @@ public interface PinService {
     PinDTO createPin(CreatePinDTO createPinDTO);
 
     /**
+     * Retrieve a single pin by id or throw if not found.
+     */
+    PinDTO getPin(String id);
+
+    /**
      * Delete the pin with the given id, or throw if not found.
      */
     void deletePin(String id);
