@@ -34,8 +34,10 @@ class PinServiceImplTest {
         Pin pin = Pin.builder()
                 .id("1")
                 .title(Map.of("en", "t"))
+                .description(Map.of("en", "d"))
                 .lat(1.0)
                 .lng(2.0)
+                .city("c")
                 .articleUrl("u")
                 .build();
         when(repo.findById("1")).thenReturn(Optional.of(pin));
@@ -46,6 +48,8 @@ class PinServiceImplTest {
         assertEquals(1.0, dto.getLat());
         assertEquals(2.0, dto.getLng());
         assertEquals("u", dto.getArticleUrl());
+        assertEquals("c", dto.getCity());
+        assertEquals(Map.of("en", "d"), dto.getDescription());
         verify(repo).findById("1");
     }
 
