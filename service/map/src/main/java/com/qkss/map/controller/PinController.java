@@ -25,6 +25,12 @@ public class PinController {
         return service.listPins();
     }
 
+    // 1b) Public endpoint: get pin by ID
+    @GetMapping("/{id}")
+    public ResponseEntity<PinDTO> getPin(@PathVariable String id) {
+        return ResponseEntity.ok(service.getPin(id));
+    }
+
     // 2) Login endpoint: accepts {"password":"admin123"}, returns raw JWT
     @PostMapping("/admin/login")
     public ResponseEntity<String> login(@RequestBody Map<String, String> body) {

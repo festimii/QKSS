@@ -53,6 +53,19 @@ public class PinServiceImpl implements PinService {
     }
 
     @Override
+    public PinDTO getPin(String id) {
+        Pin pin = pinRepository.findById(id)
+                .orElseThrow(() -> new PinNotFoundException("Pin not found with id: " + id));
+        return new PinDTO(
+                pin.getId(),
+                pin.getTitle(),
+                pin.getLat(),
+                pin.getLng(),
+                pin.getArticleUrl()
+        );
+    }
+
+    @Override
     public void deletePin(String id) {
         Pin pin = pinRepository.findById(id)
                 .orElseThrow(() -> new PinNotFoundException("Pin not found with id: " + id));
