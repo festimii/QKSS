@@ -172,7 +172,7 @@ function addMarkers(pins) {
     const marker = L.marker([pin.lat, pin.lng])
       .addTo(map)
       .bindPopup(
-        `<b>${getLocalizedTitle(pin)}</b><br><a href="news.html?id=${
+        `<b>${getLocalizedTitle(pin)}</b><br><a href="news/?id=${
           pin.id
         }">Read more</a>`
       )
@@ -220,7 +220,7 @@ function showPinDetails(pin) {
   if (cityEl) cityEl.textContent = pin.city || "";
   document.getElementById("pinModalTitle").textContent = getLocalizedTitle(pin);
   const readMore = document.getElementById("modalReadMore");
-  if (readMore) readMore.href = `news.html?id=${pin.id}`;
+  if (readMore) readMore.href = `news/?id=${pin.id}`;
   const modal = new bootstrap.Modal(document.getElementById("pinModal"));
   modal.show();
 }
