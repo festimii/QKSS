@@ -43,6 +43,7 @@
         <button type="submit" class="btn btn-dark w-100">Login</button>
       </form>
     </div>
+    <script src="../../config.js"></script>
     <script>
       if (
         !sessionStorage.getItem("jwt_token") &&
@@ -52,7 +53,7 @@
       }
 
       document.addEventListener("DOMContentLoaded", () => {
-        const API_BASE_URL = "/api/pins";
+        const PINS_API_URL = `${API_BASE_URL}/pins`;
 
         const form = document.getElementById("loginForm");
         if (form) {
@@ -60,7 +61,7 @@
             e.preventDefault();
             const pw = document.getElementById("password").value;
 
-            const res = await fetch(`${API_BASE_URL}/admin/login`, {
+            const res = await fetch(`${PINS_API_URL}/admin/login`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ password: pw }),
