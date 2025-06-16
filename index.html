@@ -103,15 +103,11 @@
             ></button>
           </div>
           <div class="modal-body">
-            <p id="pinDescription" class="mb-3"></p>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <strong>Coordinates:</strong> <span id="pinCoords"></span>
-              </li>
-              <li class="list-group-item">
-                <strong>Category:</strong> <span id="pinCategory"></span>
-              </li>
-            </ul>
+            <p id="pinDescription" class="mb-2 lead"></p>
+            <p class="text-muted mb-3">
+              <strong id="cityLabel">Location:</strong>
+              <span id="pinCity"></span>
+            </p>
             <div class="mt-3 d-flex gap-2">
               <a id="modalReadMore" href="#" class="btn btn-primary" target="_blank">Read more</a>
               <button class="btn btn-outline-secondary" onclick="copyModalLink()">Copy Link</button>
