@@ -17,7 +17,7 @@ Simple Pin Viewer Webpage for creating and viewing geolocated news. The main das
 ## Features
 
 - 📍 Display latest accident news as map pins
-- 🔎 Clickable markers with title and “Read more” links
+ - 🔎 Clickable markers with title and “Read more” links to a detail page
 - 📋 Sidebar list view of all pins
 - 🗒️ Search now matches pin descriptions
 - 🛠️ Detailed modal with coordinates and description
