@@ -23,8 +23,10 @@ public class PinServiceImpl implements PinService {
                 .map(pin -> new PinDTO(
                         pin.getId(),
                         pin.getTitle(),
+                        pin.getDescription(),
                         pin.getLat(),
                         pin.getLng(),
+                        pin.getCity(),
                         pin.getArticleUrl()
                 ))
                 .collect(Collectors.toList());
@@ -46,8 +48,10 @@ public class PinServiceImpl implements PinService {
         return new PinDTO(
                 saved.getId(),
                 saved.getTitle(),
+                saved.getDescription(),
                 saved.getLat(),
                 saved.getLng(),
+                saved.getCity(),
                 saved.getArticleUrl()
         );
     }
@@ -59,8 +63,10 @@ public class PinServiceImpl implements PinService {
         return new PinDTO(
                 pin.getId(),
                 pin.getTitle(),
+                pin.getDescription(),
                 pin.getLat(),
                 pin.getLng(),
+                pin.getCity(),
                 pin.getArticleUrl()
         );
     }
