@@ -214,11 +214,22 @@ function showPinDetails(pin) {
   document.getElementById("pinDescription").textContent = getLocalizedDescription(pin);
   document.getElementById("pinCoords").textContent = `${pin.lat}, ${pin.lng}`;
   document.getElementById("pinCategory").textContent = pin.category || "N/A";
-  document.getElementById("pinModalLabel").textContent = getLocalizedTitle(pin);
+  document.getElementById("pinModalTitle").textContent = getLocalizedTitle(pin);
   const readMore = document.getElementById("modalReadMore");
   if (readMore) readMore.href = `news.html?id=${pin.id}`;
   const modal = new bootstrap.Modal(document.getElementById("pinModal"));
   modal.show();
+}
+
+function copyModalLink() {
+  const link = document.getElementById("modalReadMore").href;
+  navigator.clipboard.writeText(link).then(() => {
+    const btn = document.activeElement;
+    if (btn && btn.tagName === "BUTTON") {
+      btn.textContent = "Copied!";
+      setTimeout(() => (btn.textContent = "Copy Link"), 1500);
+    }
+  });
 }
 
 function setupSearchUI() {
@@ -287,7 +298,7 @@ function updateUIStrings() {
     .getElementById("searchInput")
     .setAttribute("placeholder", u.searchPlaceholder);
 
-  document.getElementById("pinModalLabel").textContent = u.pinDetailsTitle;
+  document.getElementById("pinModalTitle").textContent = u.pinDetailsTitle;
   document.querySelector(
     "#pinCoords"
   ).previousElementSibling.firstChild.textContent = u.coordsLabel + " ";

@@ -42,16 +42,23 @@
     </nav>
 
     <main class="flex-grow-1 container py-4" id="content">
-      <h2 id="newsTitle" class="mb-3"></h2>
-      <p id="newsDescription"></p>
-      <p>
-        <strong>Coordinates:</strong> <span id="newsCoords"></span><br />
-        <strong>Category:</strong> <span id="newsCategory"></span>
-      </p>
-      <p>
-        <a id="externalLink" href="#" target="_blank" class="btn btn-primary">Open Original Article</a>
-        <a href="index.html" class="btn btn-secondary ms-2">&larr; Back to Map</a>
-      </p>
+      <article class="card shadow-sm mx-auto" style="max-width: 720px;">
+        <div class="card-body">
+          <h1 id="newsTitle" class="h4 mb-3"></h1>
+          <p id="newsDescription" class="mb-4"></p>
+          <dl class="row small">
+            <dt class="col-sm-3" id="coordsLabel">Coordinates:</dt>
+            <dd class="col-sm-9" id="newsCoords"></dd>
+            <dt class="col-sm-3" id="categoryLabel">Category:</dt>
+            <dd class="col-sm-9" id="newsCategory"></dd>
+          </dl>
+          <div class="mt-3 d-flex gap-2">
+            <a id="externalLink" href="#" target="_blank" class="btn btn-primary">Open Original Article</a>
+            <button class="btn btn-outline-secondary" onclick="copyNewsLink()">Copy Link</button>
+            <a href="index.html" class="btn btn-secondary ms-auto">&larr; Back to Map</a>
+          </div>
+        </div>
+      </article>
     </main>
 
     <footer class="bg-dark text-light text-center py-2 mt-auto">
@@ -119,13 +126,23 @@
           document.getElementById("externalLink").textContent = u.externalLink;
           document.getElementById("externalLink").href = pin.articleUrl || "#";
           document.querySelector("a.btn-secondary").textContent = u.back;
-          document.querySelector("#newsCoords").previousSibling.textContent = `${u.coordsLabel} `;
-          document.querySelector("#newsCategory").previousSibling.textContent = `${u.categoryLabel} `;
+          document.getElementById("coordsLabel").textContent = u.coordsLabel;
+          document.getElementById("categoryLabel").textContent = u.categoryLabel;
         } catch (err) {
           document.getElementById("content").innerHTML = `<div class="alert alert-danger">Unable to load news.</div>`;
         }
       }
       window.addEventListener("DOMContentLoaded", loadNews);
+
+      function copyNewsLink() {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          const btn = document.activeElement;
+          if (btn && btn.tagName === "BUTTON") {
+            btn.textContent = "Copied!";
+            setTimeout(() => (btn.textContent = "Copy Link"), 1500);
+          }
+        });
+      }
     </script>
   </body>
 </html>
