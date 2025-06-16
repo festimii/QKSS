@@ -37,7 +37,7 @@ Simple Pin Viewer Webpage for creating and viewing geolocated news. The main das
    git clone https://github.com/festimii/QKSS.git
    cd QKSS
    ```
-   Open `home/index.html` in your browser for the main site.
+   Open `index.html` in your browser for the main site.
    The admin interface is served from the `admin/` directory.
 
 2. **Build Backend**
