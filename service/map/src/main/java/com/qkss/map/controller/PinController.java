@@ -14,10 +14,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/pins")
-@RequiredArgsConstructor
 @CrossOrigin(origins = "http://127.0.0.1:5500")  // adjust as needed
 public class PinController {
     private final PinService service;
+
+    public PinController(PinService service) {
+        this.service = service;
+    }
 
     // 1) Public endpoint: list all pins
     @GetMapping
