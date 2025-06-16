@@ -73,3 +73,22 @@ body {
 #pinModal .modal-body .lead {
   font-size: 1.1rem;
 }
+
+/* Wider modal on large screens */
+@media (min-width: 992px) {
+  #pinModal .modal-dialog {
+    max-width: 900px;
+  }
+}
+
+/* Mobile tweaks */
+@media (max-width: 576px) {
+  #pinModal .modal-dialog {
+    margin: 1rem;
+  }
+}
+
+/* News page */
+.news-card {
+  max-width: 860px;
+}
