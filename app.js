@@ -130,6 +130,31 @@ function getLocalizedTitle(pin) {
   return String(pin.title || "(no title)");
 }
 
+function normalizePinDescription(pin) {
+  if (typeof pin.description === "string") {
+    try {
+      const parsed = JSON.parse(pin.description);
+      pin.description =
+        parsed && typeof parsed === "object" ? parsed : { en: pin.description };
+    } catch {
+      pin.description = { en: pin.description };
+    }
+  }
+}
+
+function getLocalizedDescription(pin) {
+  const lang = getLang();
+  if (pin.description && typeof pin.description === "object") {
+    return (
+      pin.description[lang] ||
+      pin.description.en ||
+      Object.values(pin.description).find((v) => v) ||
+      ""
+    );
+  }
+  return String(pin.description || "");
+}
+
 async function fetchPins() {
   const res = await fetch(`${API_BASE_URL}/pins`);
   if (!res.ok) throw new Error("Failed to fetch pins");
@@ -147,7 +172,8 @@ function addMarkers(pins) {
         `<b>${getLocalizedTitle(pin)}</b><br><a href="${
           pin.articleUrl
         }" target="_blank">Read more</a>`
-      );
+      )
+      .on("click", () => showPinDetails(pin));
     markers.push(marker);
   });
 }
@@ -167,6 +193,7 @@ function populateList(pins) {
           return lat === pin.lat && lng === pin.lng;
         })
         ?.openPopup();
+      showPinDetails(pin);
     };
     list.appendChild(li);
   });
@@ -174,11 +201,22 @@ function populateList(pins) {
 
 function filterPins(query) {
   const q = query.trim().toLowerCase();
-  const filtered = allPins.filter((pin) =>
-    getLocalizedTitle(pin).toLowerCase().includes(q)
-  );
+  const filtered = allPins.filter((pin) => {
+    const title = getLocalizedTitle(pin).toLowerCase();
+    const desc = getLocalizedDescription(pin).toLowerCase();
+    return title.includes(q) || desc.includes(q);
+  });
   populateList(filtered);
   addMarkers(filtered);
+}
+
+function showPinDetails(pin) {
+  document.getElementById("pinDescription").textContent = getLocalizedDescription(pin);
+  document.getElementById("pinCoords").textContent = `${pin.lat}, ${pin.lng}`;
+  document.getElementById("pinCategory").textContent = pin.category || "N/A";
+  document.getElementById("pinModalLabel").textContent = getLocalizedTitle(pin);
+  const modal = new bootstrap.Modal(document.getElementById("pinModal"));
+  modal.show();
 }
 
 function setupSearchUI() {
@@ -186,12 +224,14 @@ function setupSearchUI() {
   const sidebarInput = document.getElementById("searchInput");
   const clearBtn = document.getElementById("clearSearch");
 
-  navInput.addEventListener("input", () => filterPins(navInput.value));
-  sidebarInput.addEventListener("input", () => filterPins(sidebarInput.value));
+  if (navInput)
+    navInput.addEventListener("input", () => filterPins(navInput.value));
+  if (sidebarInput)
+    sidebarInput.addEventListener("input", () => filterPins(sidebarInput.value));
 
   clearBtn.addEventListener("click", () => {
-    navInput.value = "";
-    sidebarInput.value = "";
+    if (navInput) navInput.value = "";
+    if (sidebarInput) sidebarInput.value = "";
     filterPins("");
   });
 }
@@ -224,6 +264,7 @@ async function init() {
     const raw = await fetchPins();
     allPins = raw.map((pin) => {
       normalizePinTitle(pin);
+      normalizePinDescription(pin);
       return pin;
     });
     addMarkers(allPins);
