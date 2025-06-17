@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Map;
+import java.time.Instant;
 
 /**
  * The Pin entity (e.g., stored in a MongoDB “pins” collection).
@@ -33,4 +34,6 @@ public class Pin {
     private String city;
 
     private String articleUrl;
+
+    private Instant timestamp;
 }

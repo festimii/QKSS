@@ -20,6 +20,7 @@ Simple Pin Viewer Webpage for creating and viewing geolocated news. The main das
  - 🔎 Clickable markers with title and “Read more” links to a detail page
 - 📋 Sidebar list view of all pins
 - 🗒️ Search now matches pin descriptions
+- 📅 Filter pins by month range
 - 🛠️ Detailed modal with coordinates and description
 - 🌐 Responsive layout with Bootstrap
 - 🏳️ Language switcher (EN/SQ/SR)

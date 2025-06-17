@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Map;
 import java.util.Optional;
+import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -39,6 +40,7 @@ class PinServiceImplTest {
                 .lng(2.0)
                 .city("c")
                 .articleUrl("u")
+                .timestamp(Instant.parse("2025-06-01T12:00:00Z"))
                 .build();
         when(repo.findById("1")).thenReturn(Optional.of(pin));
 
@@ -50,6 +52,7 @@ class PinServiceImplTest {
         assertEquals("u", dto.getArticleUrl());
         assertEquals("c", dto.getCity());
         assertEquals(Map.of("en", "d"), dto.getDescription());
+        assertEquals(Instant.parse("2025-06-01T12:00:00Z"), dto.getTimestamp());
         verify(repo).findById("1");
     }
 

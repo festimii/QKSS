@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.Map;
+import java.time.Instant;
 
 /**
  * DTO used to receive a “create pin” request from the front end.
@@ -23,7 +24,8 @@ import java.util.Map;
  *   "city": "Pristina",
  *   "lat": 42.6723,
  *   "lng": 21.1906,
- *   "articleUrl": "https://en.wikipedia.org/wiki/Germia_Park"
+ *   "articleUrl": "https://en.wikipedia.org/wiki/Germia_Park",
+ *   "timestamp": "2025-06-01T12:00:00Z"
  * }
  */
 @Data
@@ -45,4 +47,8 @@ public class CreatePinDTO {
 
     @NotNull
     private String articleUrl;
+
+    // ISO-8601 timestamp of when the event occurred
+    @NotNull
+    private Instant timestamp;
 }
