@@ -138,7 +138,7 @@
             </p>
             <div class="mt-3 d-flex gap-2">
               <a id="modalReadMore" href="#" class="btn btn-primary" target="_blank">Read more</a>
-              <button class="btn btn-outline-secondary" onclick="copyModalLink()">Copy Link</button>
+              <button id="copyLinkBtn" class="btn btn-outline-secondary" onclick="copyModalLink()">Copy Link</button>
             </div>
           </div>
           <div class="modal-footer">
@@ -158,14 +158,14 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Filters</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <h5 class="modal-title" id="filterModalTitle">Filters</h5>
+            <button id="filterModalClose" type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
             <div class="mb-3">
-              <h6>Categories</h6>
+              <h6 id="categoriesHeading">Categories</h6>
               <details>
-                <summary>Risk &amp; Tensions 🔴</summary>
+                <summary id="summaryRisk">Risk &amp; Tensions 🔴</summary>
                 <div class="form-check">
                   <input class="form-check-input category-filter" type="checkbox" value="Violent Incidents" id="cat-violent" />
                   <label class="form-check-label" for="cat-violent">Violent Incidents</label>
@@ -180,7 +180,7 @@
                 </div>
               </details>
               <details class="mt-2">
-                <summary>Positive Developments 🟢</summary>
+                <summary id="summaryPositive">Positive Developments 🟢</summary>
                 <div class="form-check">
                   <input class="form-check-input category-filter" type="checkbox" value="Interethnic Cooperation Initiatives" id="cat-coop" />
                   <label class="form-check-label" for="cat-coop">Interethnic Cooperation Initiatives</label>
@@ -195,7 +195,7 @@
                 </div>
               </details>
               <details class="mt-2">
-                <summary>Institutional Responses &amp; Monitoring ⚖️</summary>
+                <summary id="summaryInstitutional">Institutional Responses &amp; Monitoring ⚖️</summary>
                 <div class="form-check">
                   <input class="form-check-input category-filter" type="checkbox" value="Arrests &amp; Legal Actions" id="cat-arrests" />
                   <label class="form-check-label" for="cat-arrests">Arrests &amp; Legal Actions</label>
@@ -211,16 +211,16 @@
               </details>
             </div>
             <div class="mb-3">
-              <label class="form-label" for="startDate">Date range</label>
+              <label class="form-label" id="dateRangeLabel" for="startDate">Date range</label>
               <div class="input-group">
                 <input type="month" id="startDate" class="form-control" min="2025-01" />
-                <span class="input-group-text">to</span>
+                <span class="input-group-text" id="dateRangeTo">to</span>
                 <input type="month" id="endDate" class="form-control" />
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button id="cancelFilters" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             <button id="applyFilters" type="button" class="btn btn-primary">Apply</button>
           </div>
         </div>
