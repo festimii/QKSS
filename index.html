@@ -25,6 +25,7 @@
     />
 
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="vendor/flatpickr.min.css" />
   </head>
   <body class="d-flex flex-column vh-100">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -211,15 +212,12 @@
               </details>
             </div>
             <div class="mb-3">
-              <label class="form-label" id="dateRangeLabel" for="startDate">Date range</label>
-              <div class="input-group">
-                <input type="month" id="startDate" class="form-control" min="2025-01" />
-                <span class="input-group-text" id="dateRangeTo">to</span>
-                <input type="month" id="endDate" class="form-control" />
-              </div>
+              <label class="form-label" id="dateRangeLabel" for="dateRange">Date range</label>
+              <input type="text" id="dateRange" class="form-control" placeholder="Select range" readonly />
             </div>
           </div>
           <div class="modal-footer">
+            <button id="clearFilters" type="button" class="btn btn-outline-danger">Clear</button>
             <button id="cancelFilters" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             <button id="applyFilters" type="button" class="btn btn-primary">Apply</button>
           </div>
@@ -244,6 +242,7 @@
     ></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js"></script>
+    <script src="vendor/flatpickr.min.js"></script>
     <script src="config.js"></script>
     <script src="app.js"></script>
   </body>

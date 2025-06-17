@@ -40,6 +40,7 @@ const UI_STRINGS = {
     dateRangeLabel: "Date range",
     dateRangeTo: "to",
     applyFilters: "Apply",
+    clearFilters: "Clear",
     cancel: "Cancel",
     readMore: "Read more",
     copyLink: "Copy Link",
@@ -81,6 +82,7 @@ const UI_STRINGS = {
     dateRangeLabel: "Periudha",
     dateRangeTo: "deri",
     applyFilters: "Apliko",
+    clearFilters: "Pastro",
     cancel: "Anulo",
     readMore: "Lexo më shumë",
     copyLink: "Kopjo Lidhjen",
@@ -122,6 +124,7 @@ const UI_STRINGS = {
     dateRangeLabel: "Vremenski period",
     dateRangeTo: "do",
     applyFilters: "Primeni",
+    clearFilters: "Obriši",
     cancel: "Otkaži",
     readMore: "Pročitaj više",
     copyLink: "Kopiraj Link",
@@ -310,21 +313,51 @@ function setupSearchUI() {
 }
 
 function setupFilterControls() {
-  const startInput = document.getElementById("startDate");
-  const endInput = document.getElementById("endDate");
+  const rangeInput = document.getElementById("dateRange");
   const applyBtn = document.getElementById("applyFilters");
+  const clearBtn = document.getElementById("clearFilters");
+
+  const fp = rangeInput
+    ? flatpickr(rangeInput, { mode: "range", dateFormat: "Y-m-d" })
+    : null;
+
+  if (clearBtn) {
+    clearBtn.addEventListener("click", async () => {
+      document
+        .querySelectorAll(".category-filter")
+        .forEach((c) => (c.checked = false));
+      if (fp) fp.clear();
+      startFilter = null;
+      endFilter = null;
+      activeCategories = new Set();
+
+      try {
+        const raw = await fetchPins();
+        allPins = raw.map((pin) => {
+          normalizePinTitle(pin);
+          normalizePinDescription(pin);
+          return pin;
+        });
+      } catch (e) {
+        console.error("Error fetching pins:", e);
+      }
+
+      filterPins();
+
+      const modalEl = document.getElementById("filterModal");
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      if (modal) modal.hide();
+    });
+  }
 
   if (!applyBtn) return;
 
   applyBtn.addEventListener("click", async () => {
-    startFilter = startInput.value ? new Date(startInput.value + "-01") : null;
-
-    if (endInput.value) {
-      const d = new Date(endInput.value + "-01");
-      d.setMonth(d.getMonth() + 1);
-      d.setDate(0);
-      endFilter = d;
+    if (fp && fp.selectedDates.length) {
+      startFilter = fp.selectedDates[0];
+      endFilter = fp.selectedDates[1] || fp.selectedDates[0];
     } else {
+      startFilter = null;
       endFilter = null;
     }
 
@@ -433,8 +466,8 @@ function updateUIStrings() {
   if (sumInst) sumInst.textContent = u.institutionalSummary;
   const dateLbl = document.getElementById("dateRangeLabel");
   if (dateLbl) dateLbl.textContent = u.dateRangeLabel;
-  const dateTo = document.getElementById("dateRangeTo");
-  if (dateTo) dateTo.textContent = u.dateRangeTo;
+  const clearBtn = document.getElementById("clearFilters");
+  if (clearBtn) clearBtn.textContent = u.clearFilters;
   const applyBtn = document.getElementById("applyFilters");
   if (applyBtn) applyBtn.textContent = u.applyFilters;
   const cancelBtn = document.getElementById("cancelFilters");
