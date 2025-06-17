@@ -164,7 +164,7 @@ function getLocalizedDescription(pin) {
 async function fetchPins(filters = {}) {
   const params = new URLSearchParams();
   if (filters.categories && filters.categories.length) {
-    params.set("categories", filters.categories.join(","));
+    filters.categories.forEach((c) => params.append("categories", c));
   }
   if (filters.start) {
     params.set("start", filters.start.toISOString());
