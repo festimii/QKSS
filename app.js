@@ -259,26 +259,15 @@ function copyModalLink() {
 }
 
 function setupSearchUI() {
-  const navInput = document.getElementById("searchInputNav");
-  const sidebarInput = document.getElementById("searchInput");
-  const clearBtn = document.getElementById("clearSearch");
+  const searchInput = document.getElementById("searchInput");
+  if (!searchInput) {
+    console.warn("searchInput element not found.");
+    return;
+  }
 
-  if (navInput)
-    navInput.addEventListener("input", () => {
-      searchQuery = navInput.value;
-      filterPins();
-    });
-  if (sidebarInput)
-    sidebarInput.addEventListener("input", () => {
-      searchQuery = sidebarInput.value;
-      filterPins();
-    });
-
-  clearBtn.addEventListener("click", () => {
-    if (navInput) navInput.value = "";
-    if (sidebarInput) sidebarInput.value = "";
-    searchQuery = "";
-    filterPins();
+  searchInput.addEventListener("input", (e) => {
+    const query = e.target.value.toLowerCase();
+    filterPins(query);
   });
 }
 
