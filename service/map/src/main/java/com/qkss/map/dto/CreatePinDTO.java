@@ -37,6 +37,9 @@ public class CreatePinDTO {
     private Map<String, String> description;
 
     @NotNull
+    private String category;
+
+    @NotNull
     private Double lat;
 
     @NotNull

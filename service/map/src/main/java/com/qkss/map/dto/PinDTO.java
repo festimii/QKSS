@@ -35,6 +35,8 @@ public class PinDTO {
 
     private Map<String, String> description;
 
+    private String category;
+
     private double lat;
     private double lng;
 

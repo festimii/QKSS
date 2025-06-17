@@ -24,6 +24,7 @@ public class PinServiceImpl implements PinService {
                         pin.getId(),
                         pin.getTitle(),
                         pin.getDescription(),
+                        pin.getCategory(),
                         pin.getLat(),
                         pin.getLng(),
                         pin.getCity(),
@@ -39,6 +40,7 @@ public class PinServiceImpl implements PinService {
         Pin pin = Pin.builder()
                 .title(dto.getTitle())
                 .description(dto.getDescription())
+                .category(dto.getCategory())
                 .lat(dto.getLat())
                 .lng(dto.getLng())
                 .city(dto.getCity())
@@ -51,6 +53,7 @@ public class PinServiceImpl implements PinService {
                 saved.getId(),
                 saved.getTitle(),
                 saved.getDescription(),
+                saved.getCategory(),
                 saved.getLat(),
                 saved.getLng(),
                 saved.getCity(),
@@ -67,6 +70,7 @@ public class PinServiceImpl implements PinService {
                 pin.getId(),
                 pin.getTitle(),
                 pin.getDescription(),
+                pin.getCategory(),
                 pin.getLat(),
                 pin.getLng(),
                 pin.getCity(),
