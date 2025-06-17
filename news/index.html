@@ -94,7 +94,7 @@
               class="btn btn-primary"
               >Open Original Article</a
             >
-            <button class="btn btn-outline-secondary" onclick="copyNewsLink()">
+            <button id="copyLinkBtn" class="btn btn-outline-secondary" onclick="copyNewsLink()">
               Copy Link
             </button>
             <a href="/" class="btn btn-secondary ms-auto"
@@ -130,18 +130,24 @@
           back: "\u2190 Back to Map",
           coordsLabel: "Coordinates:",
           categoryLabel: "City:",
+          copyLink: "Copy Link",
+          copied: "Copied!",
         },
         sq: {
           externalLink: "Hape Artikullin",
           back: "\u2190 Kthehu te Harta",
           coordsLabel: "Koordinatat:",
           categoryLabel: "Qyteti:",
+          copyLink: "Kopjo Lidhjen",
+          copied: "U kopjua!",
         },
         sr: {
           externalLink: "Otvorite Članak",
           back: "\u2190 Nazad na mapu",
           coordsLabel: "Koordinate:",
           categoryLabel: "Цити:",
+          copyLink: "Kopiraj Link",
+          copied: "Kopirano!",
         },
       };
       function updateLangDropdownDisplay() {
@@ -183,6 +189,7 @@
           document.getElementById("externalLink").textContent = u.externalLink;
           document.getElementById("externalLink").href = pin.articleUrl || "#";
           document.querySelector("a.btn-secondary").textContent = u.back;
+          document.getElementById("copyLinkBtn").textContent = u.copyLink;
           document.getElementById("coordsLabel").textContent = u.coordsLabel;
           document.getElementById("categoryLabel").textContent =
             u.categoryLabel;
@@ -195,11 +202,12 @@
       window.addEventListener("DOMContentLoaded", loadNews);
 
       function copyNewsLink() {
+        const u = UI_STRINGS[getLang()];
         navigator.clipboard.writeText(window.location.href).then(() => {
           const btn = document.activeElement;
           if (btn && btn.tagName === "BUTTON") {
-            btn.textContent = "Copied!";
-            setTimeout(() => (btn.textContent = "Copy Link"), 1500);
+            btn.textContent = u.copied;
+            setTimeout(() => (btn.textContent = u.copyLink), 1500);
           }
         });
       }

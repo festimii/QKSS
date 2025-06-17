@@ -31,6 +31,19 @@ const UI_STRINGS = {
     labelUrl: "Article URL",
     btnSubmit: "Submit",
     btnBack: "⬅ Back",
+    filtersBtn: "Filters",
+    filtersTitle: "Filters",
+    categoriesHeading: "Categories",
+    riskSummary: "Risk & Tensions 🔴",
+    positiveSummary: "Positive Developments 🟢",
+    institutionalSummary: "Institutional Responses & Monitoring ⚖️",
+    dateRangeLabel: "Date range",
+    dateRangeTo: "to",
+    applyFilters: "Apply",
+    cancel: "Cancel",
+    readMore: "Read more",
+    copyLink: "Copy Link",
+    copied: "Copied!",
   },
   sq: {
     locations: "Vendndodhjet",
@@ -59,6 +72,19 @@ const UI_STRINGS = {
     labelUrl: "URL Artikulli",
     btnSubmit: "Dërgo",
     btnBack: "⬅ Kthehu",
+    filtersBtn: "Filtrat",
+    filtersTitle: "Filtrat",
+    categoriesHeading: "Kategoritë",
+    riskSummary: "Rreziqet dhe Tensionet 🔴",
+    positiveSummary: "Zhvillimet Pozitive 🟢",
+    institutionalSummary: "Përgjigjet Institucionale & Monitorimi ⚖️",
+    dateRangeLabel: "Periudha",
+    dateRangeTo: "deri",
+    applyFilters: "Apliko",
+    cancel: "Anulo",
+    readMore: "Lexo më shumë",
+    copyLink: "Kopjo Lidhjen",
+    copied: "U kopjua!",
   },
   sr: {
     locations: "Lokacije",
@@ -87,6 +113,19 @@ const UI_STRINGS = {
     labelUrl: "URL Članka",
     btnSubmit: "Sačuvaj",
     btnBack: "⬅ Nazad",
+    filtersBtn: "Filteri",
+    filtersTitle: "Filteri",
+    categoriesHeading: "Kategorije",
+    riskSummary: "Rizici i Tenzije 🔴",
+    positiveSummary: "Pozitivni Razvoj 🟢",
+    institutionalSummary: "Institucionalni Odgovori & Monitoring ⚖️",
+    dateRangeLabel: "Vremenski period",
+    dateRangeTo: "do",
+    applyFilters: "Primeni",
+    cancel: "Otkaži",
+    readMore: "Pročitaj više",
+    copyLink: "Kopiraj Link",
+    copied: "Kopirano!",
   },
 };
 
@@ -186,9 +225,7 @@ function addMarkers(pins) {
     const marker = L.marker([pin.lat, pin.lng])
       .addTo(map)
       .bindPopup(
-        `<b>${getLocalizedTitle(pin)}</b><br><a href="news/?id=${
-          pin.id
-        }">Read more</a>`
+        `<b>${getLocalizedTitle(pin)}</b><br><a href="news/?id=${pin.id}">${UI_STRINGS[getLang()].readMore}</a>`
       )
       .on("click", () => showPinDetails(pin));
     markers.push(marker);
@@ -249,11 +286,12 @@ function showPinDetails(pin) {
 
 function copyModalLink() {
   const link = document.getElementById("modalReadMore").href;
+  const u = UI_STRINGS[getLang()];
   navigator.clipboard.writeText(link).then(() => {
     const btn = document.activeElement;
     if (btn && btn.tagName === "BUTTON") {
-      btn.textContent = "Copied!";
-      setTimeout(() => (btn.textContent = "Copy Link"), 1500);
+      btn.textContent = u.copied;
+      setTimeout(() => (btn.textContent = u.copyLink), 1500);
     }
   });
 }
@@ -369,11 +407,38 @@ function updateUIStrings() {
     .getElementById("searchInput")
     .setAttribute("placeholder", u.searchPlaceholder);
 
+  const filterBtn = document.getElementById("openFilterModal");
+  if (filterBtn) filterBtn.textContent = u.filtersBtn;
+
   document.getElementById("pinModalTitle").textContent = u.pinDetailsTitle;
   const cityLbl = document.getElementById("cityLabel");
   if (cityLbl) cityLbl.textContent = u.cityLabel;
   const catLbl = document.getElementById("categoryLabel");
   if (catLbl) catLbl.textContent = u.categoryLabel;
+
+  const copyBtn = document.getElementById("copyLinkBtn");
+  if (copyBtn) copyBtn.textContent = u.copyLink;
+  const readMore = document.getElementById("modalReadMore");
+  if (readMore) readMore.textContent = u.readMore;
+
+  const fmTitle = document.getElementById("filterModalTitle");
+  if (fmTitle) fmTitle.textContent = u.filtersTitle;
+  const catHeading = document.getElementById("categoriesHeading");
+  if (catHeading) catHeading.textContent = u.categoriesHeading;
+  const sumRisk = document.getElementById("summaryRisk");
+  if (sumRisk) sumRisk.textContent = u.riskSummary;
+  const sumPos = document.getElementById("summaryPositive");
+  if (sumPos) sumPos.textContent = u.positiveSummary;
+  const sumInst = document.getElementById("summaryInstitutional");
+  if (sumInst) sumInst.textContent = u.institutionalSummary;
+  const dateLbl = document.getElementById("dateRangeLabel");
+  if (dateLbl) dateLbl.textContent = u.dateRangeLabel;
+  const dateTo = document.getElementById("dateRangeTo");
+  if (dateTo) dateTo.textContent = u.dateRangeTo;
+  const applyBtn = document.getElementById("applyFilters");
+  if (applyBtn) applyBtn.textContent = u.applyFilters;
+  const cancelBtn = document.getElementById("cancelFilters");
+  if (cancelBtn) cancelBtn.textContent = u.cancel;
   document
     .querySelector("#pinModal .btn-close")
     .setAttribute("aria-label", u.close);
