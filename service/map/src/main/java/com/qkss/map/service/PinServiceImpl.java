@@ -5,6 +5,9 @@ import com.qkss.map.dto.PinDTO;
 import com.qkss.map.exception.PinNotFoundException;
 import com.qkss.map.model.Pin;
 import com.qkss.map.repository.PinRepository;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,7 @@ import java.time.Instant;
 @RequiredArgsConstructor
 public class PinServiceImpl implements PinService {
     private final PinRepository pinRepository;
+    private final MongoTemplate mongoTemplate;
 
     @Override
     public List<PinDTO> listPins() {
@@ -37,10 +41,24 @@ public class PinServiceImpl implements PinService {
 
     @Override
     public List<PinDTO> listPinsFiltered(List<String> categories, Instant start, Instant end) {
-        return pinRepository.findAll().stream()
-                .filter(p -> categories == null || categories.isEmpty() || categories.contains(p.getCategory()))
-                .filter(p -> start == null || !p.getTimestamp().isBefore(start))
-                .filter(p -> end == null || !p.getTimestamp().isAfter(end))
+        Query query = new Query();
+        Criteria criteria = new Criteria();
+        if (categories != null && !categories.isEmpty()) {
+            criteria = criteria.and("category").in(categories);
+        }
+        if (start != null) {
+            criteria = criteria.and("timestamp").gte(start);
+        }
+        if (end != null) {
+            criteria = criteria.and("timestamp").lte(end);
+        }
+        if (criteria.getCriteriaObject().size() > 0) {
+            query.addCriteria(criteria);
+        }
+
+        List<Pin> pins = mongoTemplate.find(query, Pin.class);
+
+        return pins.stream()
                 .map(p -> new PinDTO(
                         p.getId(),
                         p.getTitle(),

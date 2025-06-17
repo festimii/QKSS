@@ -5,6 +5,7 @@ import com.qkss.map.dto.PinDTO;
 import com.qkss.map.exception.PinNotFoundException;
 import com.qkss.map.model.Pin;
 import com.qkss.map.repository.PinRepository;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -21,13 +22,15 @@ class PinServiceImplTest {
 
     @Mock
     private PinRepository repo;
+    @Mock
+    private MongoTemplate mongoTemplate;
 
     private PinServiceImpl service;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        service = new PinServiceImpl(repo);
+        service = new PinServiceImpl(repo, mongoTemplate);
     }
 
     @Test

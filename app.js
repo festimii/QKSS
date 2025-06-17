@@ -227,18 +227,6 @@ function filterPins() {
     const title = getLocalizedTitle(pin).toLowerCase();
     const desc = getLocalizedDescription(pin).toLowerCase();
     if (!title.includes(q) && !desc.includes(q)) return false;
-
-    if (startFilter || endFilter) {
-      if (!pin.timestamp) return false;
-      const ts = new Date(pin.timestamp);
-      if (startFilter && ts < startFilter) return false;
-      if (endFilter && ts > endFilter) return false;
-    }
-
-    if (activeCategories.size > 0) {
-      const cat = pin.subcategory || pin.category;
-      if (!activeCategories.has(cat)) return false;
-    }
     return true;
   });
   populateList(filtered);
