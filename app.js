@@ -221,7 +221,7 @@ let activeCategories = new Set();
 let startFilter = null;
 let endFilter = null;
 
-function applyFilters() {
+function filterPins() {
   const q = searchQuery.trim().toLowerCase();
   const filtered = allPins.filter((pin) => {
     const title = getLocalizedTitle(pin).toLowerCase();
@@ -278,19 +278,19 @@ function setupSearchUI() {
   if (navInput)
     navInput.addEventListener("input", () => {
       searchQuery = navInput.value;
-      applyFilters();
+      filterPins();
     });
   if (sidebarInput)
     sidebarInput.addEventListener("input", () => {
       searchQuery = sidebarInput.value;
-      applyFilters();
+      filterPins();
     });
 
   clearBtn.addEventListener("click", () => {
     if (navInput) navInput.value = "";
     if (sidebarInput) sidebarInput.value = "";
     searchQuery = "";
-    applyFilters();
+    filterPins();
   });
 }
 
@@ -334,7 +334,7 @@ function setupFilterControls() {
       console.error("Error fetching pins:", e);
     }
 
-    applyFilters();
+    filterPins();
 
     const modalEl = document.getElementById("filterModal");
     const modal = bootstrap.Modal.getInstance(modalEl);
