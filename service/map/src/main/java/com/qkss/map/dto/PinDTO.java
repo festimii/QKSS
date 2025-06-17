@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.Map;
+import java.time.Instant;
 
 /**
  * DTO returned to clients when listing or creating pins.
@@ -20,6 +21,7 @@ import java.util.Map;
  *     "lat": 42.6723,
  *     "lng": 21.1906,
  *     "articleUrl": "https://en.wikipedia.org/wiki/Germia_Park"
+ *     "timestamp": "2025-06-01T12:00:00Z"
  *   },
  *   ...
  * ]
@@ -39,4 +41,6 @@ public class PinDTO {
     private String city;
 
     private String articleUrl;
+
+    private Instant timestamp;
 }

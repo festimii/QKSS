@@ -27,7 +27,8 @@ public class PinServiceImpl implements PinService {
                         pin.getLat(),
                         pin.getLng(),
                         pin.getCity(),
-                        pin.getArticleUrl()
+                        pin.getArticleUrl(),
+                        pin.getTimestamp()
                 ))
                 .collect(Collectors.toList());
     }
@@ -42,6 +43,7 @@ public class PinServiceImpl implements PinService {
                 .lng(dto.getLng())
                 .city(dto.getCity())
                 .articleUrl(dto.getArticleUrl())
+                .timestamp(dto.getTimestamp())
                 .build();
 
         Pin saved = pinRepository.save(pin);
@@ -52,7 +54,8 @@ public class PinServiceImpl implements PinService {
                 saved.getLat(),
                 saved.getLng(),
                 saved.getCity(),
-                saved.getArticleUrl()
+                saved.getArticleUrl(),
+                saved.getTimestamp()
         );
     }
 
@@ -67,7 +70,8 @@ public class PinServiceImpl implements PinService {
                 pin.getLat(),
                 pin.getLng(),
                 pin.getCity(),
-                pin.getArticleUrl()
+                pin.getArticleUrl(),
+                pin.getTimestamp()
         );
     }
 

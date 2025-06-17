@@ -182,9 +182,13 @@
             class="form-control"
             id="url"
             placeholder="https://example.com/news"
-            required
-          />
-        </div>
+          required
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="timestamp" class="form-label">Event Time</label>
+        <input type="datetime-local" class="form-control" id="timestamp" required />
+      </div>
         <div class="col-12" style="padding-bottom: 10px">
           <button type="submit" class="btn btn-success">Submit</button>
           <a href="../" class="btn btn-secondary ms-2">⬅ Back</a>
@@ -333,6 +337,7 @@
             lng,
             city: city || null,
             articleUrl: document.getElementById("url").value.trim(),
+            timestamp: new Date(document.getElementById("timestamp").value).toISOString(),
           };
           try {
             const res = await fetch(`${PINS_API_URL}/admin`, {
