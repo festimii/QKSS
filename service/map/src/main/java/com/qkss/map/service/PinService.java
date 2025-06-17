@@ -4,6 +4,7 @@ import com.qkss.map.dto.CreatePinDTO;
 import com.qkss.map.dto.PinDTO;
 
 import java.util.List;
+import java.time.Instant;
 
 
 
@@ -27,4 +28,9 @@ public interface PinService {
      * Delete the pin with the given id, or throw if not found.
      */
     void deletePin(String id);
+
+    /**
+     * Retrieve pins filtered by optional category list and time range.
+     */
+    List<PinDTO> listPinsFiltered(List<String> categories, Instant start, Instant end);
 }
