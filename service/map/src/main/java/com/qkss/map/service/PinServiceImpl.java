@@ -42,18 +42,17 @@ public class PinServiceImpl implements PinService {
     @Override
     public List<PinDTO> listPinsFiltered(List<String> categories, Instant start, Instant end) {
         Query query = new Query();
-        Criteria criteria = new Criteria();
+
+        if (start != null && end != null) {
+            query.addCriteria(Criteria.where("timestamp").gte(start).lte(end));
+        } else if (start != null) {
+            query.addCriteria(Criteria.where("timestamp").gte(start));
+        } else if (end != null) {
+            query.addCriteria(Criteria.where("timestamp").lte(end));
+        }
+
         if (categories != null && !categories.isEmpty()) {
-            criteria = criteria.and("category").in(categories);
-        }
-        if (start != null) {
-            criteria = criteria.and("timestamp").gte(start);
-        }
-        if (end != null) {
-            criteria = criteria.and("timestamp").lte(end);
-        }
-        if (criteria.getCriteriaObject().size() > 0) {
-            query.addCriteria(criteria);
+            query.addCriteria(Criteria.where("category").in(categories));
         }
 
         List<Pin> pins = mongoTemplate.find(query, Pin.class);
