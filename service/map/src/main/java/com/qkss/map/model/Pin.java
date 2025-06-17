@@ -33,4 +33,8 @@ public class Pin {
     private String city;
 
     private String articleUrl;
+
+    private String category;
+
+    private java.time.LocalDate eventDate;
 }

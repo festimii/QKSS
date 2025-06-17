@@ -24,7 +24,7 @@
   <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark mb-4">
       <div class="container-fluid">
-        <img src="../../QKSS-logo.jpg.png" alt="QKSS-logo" height="40" />
+        <img src="../../KCSS-logo.svg" alt="KCSS logo" height="40" />
         <div class="d-flex align-items-center gap-2 ms-auto">
           <select
             id="languageSwitcher"
@@ -185,6 +185,24 @@
             required
           />
         </div>
+        <div class="col-md-6">
+          <label for="category" class="form-label">Category</label>
+          <select id="category" class="form-select">
+            <option value="violent">Violent Incidents</option>
+            <option value="hate">Hate Speech &amp; Provocative Statements</option>
+            <option value="obstruction">Institutional Obstruction</option>
+            <option value="cooperation">Interethnic Cooperation Initiatives</option>
+            <option value="dialogues">Community Dialogues &amp; Roundtables</option>
+            <option value="policy">Inclusive Policy Measures</option>
+            <option value="arrests">Arrests &amp; Legal Actions</option>
+            <option value="reports">Reports &amp; Statements Published</option>
+            <option value="interventions">Government or International Interventions</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="eventDate" class="form-label">Event Date</label>
+          <input type="date" id="eventDate" class="form-control" />
+        </div>
         <div class="col-12" style="padding-bottom: 10px">
           <button type="submit" class="btn btn-success">Submit</button>
           <a href="../" class="btn btn-secondary ms-2">⬅ Back</a>
@@ -333,6 +351,8 @@
             lng,
             city: city || null,
             articleUrl: document.getElementById("url").value.trim(),
+            category: document.getElementById("category").value,
+            eventDate: document.getElementById("eventDate").value || null,
           };
           try {
             const res = await fetch(`${PINS_API_URL}/admin`, {

@@ -90,6 +90,9 @@ const UI_STRINGS = {
 let map;
 let markers = [];
 let allPins = [];
+let selectedCategories = new Set();
+let startDate = null;
+let endDate = null;
 
 function getLang() {
   return localStorage.getItem("lang") || "en";
@@ -207,7 +210,18 @@ function filterPins(query) {
   const filtered = allPins.filter((pin) => {
     const title = getLocalizedTitle(pin).toLowerCase();
     const desc = getLocalizedDescription(pin).toLowerCase();
-    return title.includes(q) || desc.includes(q);
+    const matchesText = title.includes(q) || desc.includes(q);
+    const matchesCategory =
+      selectedCategories.size === 0 || selectedCategories.has(pin.category);
+    const matchesDate = (() => {
+      if (!startDate && !endDate) return true;
+      const pinDate = pin.eventDate ? new Date(pin.eventDate) : null;
+      if (!pinDate) return true;
+      if (startDate && pinDate < startDate) return false;
+      if (endDate && pinDate > endDate) return false;
+      return true;
+    })();
+    return matchesText && matchesCategory && matchesDate;
   });
   populateList(filtered);
   addMarkers(filtered);
@@ -240,6 +254,25 @@ function setupSearchUI() {
   const navInput = document.getElementById("searchInputNav");
   const sidebarInput = document.getElementById("searchInput");
   const clearBtn = document.getElementById("clearSearch");
+  document.querySelectorAll(".category-input").forEach((cb) => {
+    cb.addEventListener("change", () => {
+      if (cb.checked) selectedCategories.add(cb.value);
+      else selectedCategories.delete(cb.value);
+      filterPins(sidebarInput ? sidebarInput.value : "");
+    });
+  });
+  const startEl = document.getElementById("startDate");
+  const endEl = document.getElementById("endDate");
+  if (startEl)
+    startEl.addEventListener("change", () => {
+      startDate = startEl.value ? new Date(startEl.value) : null;
+      filterPins(sidebarInput ? sidebarInput.value : "");
+    });
+  if (endEl)
+    endEl.addEventListener("change", () => {
+      endDate = endEl.value ? new Date(endEl.value) : null;
+      filterPins(sidebarInput ? sidebarInput.value : "");
+    });
 
   if (navInput)
     navInput.addEventListener("input", () => filterPins(navInput.value));
@@ -286,6 +319,7 @@ async function init() {
     });
     addMarkers(allPins);
     populateList(allPins);
+    filterPins("");
     setupSearchUI();
   } catch (e) {
     console.error("Error loading pins:", e);

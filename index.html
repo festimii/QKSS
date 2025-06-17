@@ -31,8 +31,8 @@
       <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="/">
           <img
-            src="QKSS-logo.jpg.png"
-            alt="QKSS-logo"
+            src="KCSS-logo.svg"
+            alt="KCSS logo"
             height="40"
             class="me-2"
           />
@@ -51,7 +51,10 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navMenu">
           <div class="d-flex align-items-center gap-2">
-            <div class="nav-item dropdown">
+            <div class="nav-item">
+              <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#aboutModal">About</button>
+            </div>
+            <div class="nav-item dropdown ms-2">
               <a
                 class="nav-link dropdown-toggle text-light"
                 href="#"
@@ -98,6 +101,53 @@
         style="width: 280px"
       >
         <h5>Locations <i class="bi bi-geo-alt-fill text-primary"></i></h5>
+        <div class="mb-3">
+          <label class="form-label">From</label>
+          <input type="date" id="startDate" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">To</label>
+          <input type="date" id="endDate" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <strong>Categories</strong>
+          <div class="form-check">
+            <input class="form-check-input category-input" type="checkbox" value="violent" id="catViolent" />
+            <label class="form-check-label" for="catViolent">🔴 Violent Incidents</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input category-input" type="checkbox" value="hate" id="catHate" />
+            <label class="form-check-label" for="catHate">🔴 Hate Speech &amp; Provocative Statements</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input category-input" type="checkbox" value="obstruction" id="catObstruction" />
+            <label class="form-check-label" for="catObstruction">🔴 Institutional Obstruction</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input category-input" type="checkbox" value="cooperation" id="catCooperation" />
+            <label class="form-check-label" for="catCooperation">🟢 Interethnic Cooperation Initiatives</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input category-input" type="checkbox" value="dialogues" id="catDialogues" />
+            <label class="form-check-label" for="catDialogues">🟢 Community Dialogues &amp; Roundtables</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input category-input" type="checkbox" value="policy" id="catPolicy" />
+            <label class="form-check-label" for="catPolicy">🟢 Inclusive Policy Measures</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input category-input" type="checkbox" value="arrests" id="catArrests" />
+            <label class="form-check-label" for="catArrests">⚖️ Arrests &amp; Legal Actions</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input category-input" type="checkbox" value="reports" id="catReports" />
+            <label class="form-check-label" for="catReports">⚖️ Reports &amp; Statements Published</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input category-input" type="checkbox" value="interventions" id="catInterventions" />
+            <label class="form-check-label" for="catInterventions">⚖️ Government or International Interventions</label>
+          </div>
+        </div>
         <input
           type="text"
           id="searchInput"
@@ -146,8 +196,24 @@
       </div>
     </div>
 
+    <!-- About modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">About</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <p id="aboutText">This platform displays interethnic events across Kosovo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <footer class="bg-dark text-light text-center py-2">
-      <small>© 2025 QKSS Map Viewer. Data sourced from our API.</small>
+      <small>© 2025 QKSS Map Viewer. Data sourced from our API.<br>
+      This site is part of a project supported by NED (National Endowment for Democracy), titled ‘Increasing Government Transparency and Accountability in Interethnic Dialogue,’ and implemented by KCSS. The authors wrote the specific chapters within their own capacities. As such, the views presented in this site do not necessarily reflect the views of KCSS or NED.</small>
     </footer>
 
     <script

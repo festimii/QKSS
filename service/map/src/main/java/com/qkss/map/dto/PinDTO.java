@@ -39,4 +39,8 @@ public class PinDTO {
     private String city;
 
     private String articleUrl;
+
+    private String category;
+
+    private java.time.LocalDate eventDate;
 }

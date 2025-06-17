@@ -39,6 +39,8 @@ class PinServiceImplTest {
                 .lng(2.0)
                 .city("c")
                 .articleUrl("u")
+                .category("violent")
+                .eventDate(java.time.LocalDate.now())
                 .build();
         when(repo.findById("1")).thenReturn(Optional.of(pin));
 
@@ -49,6 +51,8 @@ class PinServiceImplTest {
         assertEquals(2.0, dto.getLng());
         assertEquals("u", dto.getArticleUrl());
         assertEquals("c", dto.getCity());
+        assertEquals("violent", dto.getCategory());
+        assertNotNull(dto.getEventDate());
         assertEquals(Map.of("en", "d"), dto.getDescription());
         verify(repo).findById("1");
     }
