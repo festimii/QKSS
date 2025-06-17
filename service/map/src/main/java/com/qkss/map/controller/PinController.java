@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.List;
+import java.time.Instant;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @RestController
 @RequestMapping("/api/pins")
@@ -22,10 +24,16 @@ public class PinController {
         this.service = service;
     }
 
-    // 1) Public endpoint: list all pins
+    // 1) Public endpoint: list pins with optional filters
     @GetMapping
-    public List<PinDTO> getPins() {
-        return service.listPins();
+    public List<PinDTO> getPins(
+            @RequestParam(value = "categories", required = false) List<String> categories,
+            @RequestParam(value = "start", required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant start,
+            @RequestParam(value = "end", required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant end
+    ) {
+        return service.listPinsFiltered(categories, start, end);
     }
 
     // 1b) Public endpoint: get pin by ID

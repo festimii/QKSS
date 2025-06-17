@@ -161,8 +161,19 @@ function getLocalizedDescription(pin) {
   return String(pin.description || "");
 }
 
-async function fetchPins() {
-  const res = await fetch(`${API_BASE_URL}/pins`);
+async function fetchPins(filters = {}) {
+  const params = new URLSearchParams();
+  if (filters.categories && filters.categories.length) {
+    params.set("categories", filters.categories.join(","));
+  }
+  if (filters.start) {
+    params.set("start", filters.start.toISOString());
+  }
+  if (filters.end) {
+    params.set("end", filters.end.toISOString());
+  }
+  const url = `${API_BASE_URL}/pins${params.toString() ? `?${params}` : ""}`;
+  const res = await fetch(url);
   if (!res.ok) throw new Error("Failed to fetch pins");
   return await res.json();
 }
@@ -286,38 +297,48 @@ function setupSearchUI() {
 function setupFilterControls() {
   const startInput = document.getElementById("startDate");
   const endInput = document.getElementById("endDate");
-  const catChecks = document.querySelectorAll(".category-filter");
+  const applyBtn = document.getElementById("applyFilters");
 
-  if (startInput)
-    startInput.addEventListener("change", () => {
-      startFilter = startInput.value
-        ? new Date(startInput.value + "-01")
-        : null;
-      applyFilters();
-    });
+  if (!applyBtn) return;
 
-  if (endInput)
-    endInput.addEventListener("change", () => {
-      if (endInput.value) {
-        const d = new Date(endInput.value + "-01");
-        d.setMonth(d.getMonth() + 1);
-        d.setDate(0);
-        endFilter = d;
-      } else {
-        endFilter = null;
-      }
-      applyFilters();
-    });
+  applyBtn.addEventListener("click", async () => {
+    startFilter = startInput.value ? new Date(startInput.value + "-01") : null;
 
-  catChecks.forEach((cb) => {
-    cb.addEventListener("change", () => {
-      activeCategories = new Set(
-        Array.from(document.querySelectorAll(".category-filter:checked")).map(
-          (c) => c.value
-        )
-      );
-      applyFilters();
-    });
+    if (endInput.value) {
+      const d = new Date(endInput.value + "-01");
+      d.setMonth(d.getMonth() + 1);
+      d.setDate(0);
+      endFilter = d;
+    } else {
+      endFilter = null;
+    }
+
+    activeCategories = new Set(
+      Array.from(document.querySelectorAll(".category-filter:checked")).map(
+        (c) => c.value
+      )
+    );
+
+    try {
+      const raw = await fetchPins({
+        categories: Array.from(activeCategories),
+        start: startFilter,
+        end: endFilter,
+      });
+      allPins = raw.map((pin) => {
+        normalizePinTitle(pin);
+        normalizePinDescription(pin);
+        return pin;
+      });
+    } catch (e) {
+      console.error("Error fetching pins:", e);
+    }
+
+    applyFilters();
+
+    const modalEl = document.getElementById("filterModal");
+    const modal = bootstrap.Modal.getInstance(modalEl);
+    if (modal) modal.hide();
   });
 }
 

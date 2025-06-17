@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +31,26 @@ public class PinServiceImpl implements PinService {
                         pin.getCity(),
                         pin.getArticleUrl(),
                         pin.getTimestamp()
+                ))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PinDTO> listPinsFiltered(List<String> categories, Instant start, Instant end) {
+        return pinRepository.findAll().stream()
+                .filter(p -> categories == null || categories.isEmpty() || categories.contains(p.getCategory()))
+                .filter(p -> start == null || !p.getTimestamp().isBefore(start))
+                .filter(p -> end == null || !p.getTimestamp().isAfter(end))
+                .map(p -> new PinDTO(
+                        p.getId(),
+                        p.getTitle(),
+                        p.getDescription(),
+                        p.getCategory(),
+                        p.getLat(),
+                        p.getLng(),
+                        p.getCity(),
+                        p.getArticleUrl(),
+                        p.getTimestamp()
                 ))
                 .collect(Collectors.toList());
     }
