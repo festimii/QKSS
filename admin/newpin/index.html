@@ -145,6 +145,21 @@
         </div>
 
         <div class="col-md-6">
+          <label for="category" class="form-label">Category</label>
+          <select id="category" class="form-select">
+            <option value="Violent Incidents">Violent Incidents</option>
+            <option value="Hate Speech &amp; Provocative Statements">Hate Speech &amp; Provocative Statements</option>
+            <option value="Institutional Obstruction">Institutional Obstruction</option>
+            <option value="Interethnic Cooperation Initiatives">Interethnic Cooperation Initiatives</option>
+            <option value="Community Dialogues &amp; Roundtables">Community Dialogues &amp; Roundtables</option>
+            <option value="Inclusive Policy Measures">Inclusive Policy Measures</option>
+            <option value="Arrests &amp; Legal Actions">Arrests &amp; Legal Actions</option>
+            <option value="Reports &amp; Statements Published">Reports &amp; Statements Published</option>
+            <option value="Government or International Interventions">Government or International Interventions</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
           <label for="city" class="form-label">City (optional)</label>
           <input type="text" class="form-control" id="city" placeholder="Pristina" />
         </div>
@@ -333,6 +348,7 @@
               sq: document.getElementById("desc_sq").value.trim(),
               sr: document.getElementById("desc_sr").value.trim(),
             },
+            category: document.getElementById("category").value,
             lat,
             lng,
             city: city || null,

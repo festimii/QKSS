@@ -27,6 +27,9 @@ public class Pin {
     // Multi‐language description
     private Map<String, String> description;
 
+    // Category/subcategory for filtering
+    private String category;
+
     private Double lat;
     private Double lng;
 

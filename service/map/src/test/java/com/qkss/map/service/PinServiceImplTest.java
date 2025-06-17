@@ -36,6 +36,7 @@ class PinServiceImplTest {
                 .id("1")
                 .title(Map.of("en", "t"))
                 .description(Map.of("en", "d"))
+                .category("Violent Incidents")
                 .lat(1.0)
                 .lng(2.0)
                 .city("c")
@@ -51,6 +52,7 @@ class PinServiceImplTest {
         assertEquals(2.0, dto.getLng());
         assertEquals("u", dto.getArticleUrl());
         assertEquals("c", dto.getCity());
+        assertEquals("Violent Incidents", dto.getCategory());
         assertEquals(Map.of("en", "d"), dto.getDescription());
         assertEquals(Instant.parse("2025-06-01T12:00:00Z"), dto.getTimestamp());
         verify(repo).findById("1");

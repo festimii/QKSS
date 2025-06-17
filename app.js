@@ -25,6 +25,7 @@ const UI_STRINGS = {
     labelDescSq: "Përshkrimi (Shqip)",
     labelDescSr: "Опис (Srpski)",
     labelCity: "City (optional)",
+    labelCategory: "Category",
     labelLat: "Latitude",
     labelLng: "Longitude",
     labelUrl: "Article URL",
@@ -52,6 +53,7 @@ const UI_STRINGS = {
     labelDescSq: "Përshkrimi (Shqip)",
     labelDescSr: "Përshkrimi (Srpski)",
     labelCity: "Qyteti (opsional)",
+    labelCategory: "Kategoria",
     labelLat: "Gjerësia",
     labelLng: "Gjatësia",
     labelUrl: "URL Artikulli",
@@ -79,6 +81,7 @@ const UI_STRINGS = {
     labelDescSq: "Opis (Šqip)",
     labelDescSr: "Opis (Srpski)",
     labelCity: "Grad (opciono)",
+    labelCategory: "Kategorija",
     labelLat: "Geografska širina",
     labelLng: "Geografska dužina",
     labelUrl: "URL Članka",
@@ -236,6 +239,8 @@ function showPinDetails(pin) {
     getLocalizedDescription(pin);
   const cityEl = document.getElementById("pinCity");
   if (cityEl) cityEl.textContent = pin.city || "";
+  const catEl = document.getElementById("pinCategory");
+  if (catEl) catEl.textContent = pin.category || "";
   document.getElementById("pinModalTitle").textContent = getLocalizedTitle(pin);
   const readMore = document.getElementById("modalReadMore");
   if (readMore) readMore.href = `news/?id=${pin.id}`;
@@ -369,6 +374,8 @@ function updateUIStrings() {
   document.getElementById("pinModalTitle").textContent = u.pinDetailsTitle;
   const cityLbl = document.getElementById("cityLabel");
   if (cityLbl) cityLbl.textContent = u.cityLabel;
+  const catLbl = document.getElementById("categoryLabel");
+  if (catLbl) catLbl.textContent = u.categoryLabel;
   document
     .querySelector("#pinModal .btn-close")
     .setAttribute("aria-label", u.close);
@@ -388,6 +395,8 @@ function updateCreateFormStrings() {
   document.querySelector('label[for="desc_sq"]').textContent = u.labelDescSq;
   document.querySelector('label[for="desc_sr"]').textContent = u.labelDescSr;
 
+  const catLabel = document.querySelector('label[for="category"]');
+  if (catLabel) catLabel.textContent = u.labelCategory;
   document.querySelector('label[for="city"]').textContent = u.labelCity;
   document.querySelector('label[for="lat"]').textContent = u.labelLat;
   document.querySelector('label[for="lng"]').textContent = u.labelLng;
