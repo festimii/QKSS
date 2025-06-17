@@ -202,12 +202,30 @@ function populateList(pins) {
   });
 }
 
-function filterPins(query) {
-  const q = query.trim().toLowerCase();
+let searchQuery = "";
+let activeCategories = new Set();
+let startFilter = null;
+let endFilter = null;
+
+function applyFilters() {
+  const q = searchQuery.trim().toLowerCase();
   const filtered = allPins.filter((pin) => {
     const title = getLocalizedTitle(pin).toLowerCase();
     const desc = getLocalizedDescription(pin).toLowerCase();
-    return title.includes(q) || desc.includes(q);
+    if (!title.includes(q) && !desc.includes(q)) return false;
+
+    if (startFilter || endFilter) {
+      if (!pin.timestamp) return false;
+      const ts = new Date(pin.timestamp);
+      if (startFilter && ts < startFilter) return false;
+      if (endFilter && ts > endFilter) return false;
+    }
+
+    if (activeCategories.size > 0) {
+      const cat = pin.subcategory || pin.category;
+      if (!activeCategories.has(cat)) return false;
+    }
+    return true;
   });
   populateList(filtered);
   addMarkers(filtered);
@@ -242,14 +260,59 @@ function setupSearchUI() {
   const clearBtn = document.getElementById("clearSearch");
 
   if (navInput)
-    navInput.addEventListener("input", () => filterPins(navInput.value));
+    navInput.addEventListener("input", () => {
+      searchQuery = navInput.value;
+      applyFilters();
+    });
   if (sidebarInput)
-    sidebarInput.addEventListener("input", () => filterPins(sidebarInput.value));
+    sidebarInput.addEventListener("input", () => {
+      searchQuery = sidebarInput.value;
+      applyFilters();
+    });
 
   clearBtn.addEventListener("click", () => {
     if (navInput) navInput.value = "";
     if (sidebarInput) sidebarInput.value = "";
-    filterPins("");
+    searchQuery = "";
+    applyFilters();
+  });
+}
+
+function setupFilterControls() {
+  const startInput = document.getElementById("startDate");
+  const endInput = document.getElementById("endDate");
+  const catChecks = document.querySelectorAll(".category-filter");
+
+  if (startInput)
+    startInput.addEventListener("change", () => {
+      startFilter = startInput.value
+        ? new Date(startInput.value + "-01")
+        : null;
+      applyFilters();
+    });
+
+  if (endInput)
+    endInput.addEventListener("change", () => {
+      if (endInput.value) {
+        const d = new Date(endInput.value + "-01");
+        d.setMonth(d.getMonth() + 1);
+        d.setDate(0);
+        endFilter = d;
+      } else {
+        endFilter = null;
+      }
+      applyFilters();
+    });
+
+  catChecks.forEach((cb) => {
+    cb.addEventListener("change", () => {
+      activeCategories = new Set(
+        Array.from(document.querySelectorAll(".category-filter:checked")).map(
+          (c) => c.value
+        )
+      );
+      applyFilters();
+    });
   });
 }
 
@@ -287,6 +350,7 @@ async function init() {
     addMarkers(allPins);
     populateList(allPins);
     setupSearchUI();
+    setupFilterControls();
   } catch (e) {
     console.error("Error loading pins:", e);
   }
