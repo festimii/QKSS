@@ -13,7 +13,8 @@ const UI_STRINGS = {
     coordsLabel: "Coordinates:",
     categoryLabel: "Category:",
     cityLabel: "Location:",
-    footerText: "©2025 QKSS Map Viewer",
+    footerText:
+      "This site is part of a project supported by NED (National Endowment for Democracy), titled 'Increasing Government Transparency and Accountability in Interethnic Dialogue,' and implemented by KCSS. The authors wrote the specific chapters within their own capacities. As such, the views presented in this site do not necessarily reflect the views of KCSS or NED.",
     navBrand: "Pin Admin",
     navLogout: "Logout",
     formHeading: "Create New Pin",
@@ -55,7 +56,8 @@ const UI_STRINGS = {
     coordsLabel: "Koordinatat:",
     categoryLabel: "Kategoria:",
     cityLabel: "Vendndodhja:",
-    footerText: "©2025 Harta QKSS",
+    footerText:
+      "This site is part of a project supported by NED (National Endowment for Democracy), titled 'Increasing Government Transparency and Accountability in Interethnic Dialogue,' and implemented by KCSS. The authors wrote the specific chapters within their own capacities. As such, the views presented in this site do not necessarily reflect the views of KCSS or NED.",
     navBrand: "Admin Pikash",
     navLogout: "Dil",
     formHeading: "Krijo Pikë të Re",
@@ -97,7 +99,8 @@ const UI_STRINGS = {
     coordsLabel: "Koordinate:",
     categoryLabel: "Kategorija:",
     cityLabel: "Lokacija:",
-    footerText: "©2025 QKSS Pregled Karte",
+    footerText:
+      "This site is part of a project supported by NED (National Endowment for Democracy), titled 'Increasing Government Transparency and Accountability in Interethnic Dialogue,' and implemented by KCSS. The authors wrote the specific chapters within their own capacities. As such, the views presented in this site do not necessarily reflect the views of KCSS or NED.",
     navBrand: "Admin Pinova",
     navLogout: "Odjavi se",
     formHeading: "Kreiraj Novi Pin",
@@ -228,7 +231,9 @@ function addMarkers(pins) {
     const marker = L.marker([pin.lat, pin.lng])
       .addTo(map)
       .bindPopup(
-        `<b>${getLocalizedTitle(pin)}</b><br><a href="news/?id=${pin.id}">${UI_STRINGS[getLang()].readMore}</a>`
+        `<b>${getLocalizedTitle(pin)}</b><br><a href="news/?id=${pin.id}">${
+          UI_STRINGS[getLang()].readMore
+        }</a>`
       )
       .on("click", () => showPinDetails(pin));
     markers.push(marker);

@@ -31,13 +31,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="/">
-          <img
-            src="KCSS-logo.png"
-            alt="KCSS logo"
-            height="40"
-            class="me-2"
-          />
-          <span>KCSS Map</span>
+          <img src="KCSS-logo.png" alt="KCSS logo" height="40" class="me-2" />
+          <span>Online Risk Monitore</span>
         </a>
         <button
           class="navbar-toggler"
@@ -108,7 +103,12 @@
         />
         <ul id="pinList" class="list-group"></ul>
         <hr />
-        <button id="openFilterModal" class="btn btn-outline-secondary w-100" data-bs-toggle="modal" data-bs-target="#filterModal">
+        <button
+          id="openFilterModal"
+          class="btn btn-outline-secondary w-100"
+          data-bs-toggle="modal"
+          data-bs-target="#filterModal"
+        >
           Filters
         </button>
       </aside>
@@ -138,8 +138,20 @@
               <span id="pinCategory"></span>
             </p>
             <div class="mt-3 d-flex gap-2">
-              <a id="modalReadMore" href="#" class="btn btn-primary" target="_blank">Read more</a>
-              <button id="copyLinkBtn" class="btn btn-outline-secondary" onclick="copyModalLink()">Copy Link</button>
+              <a
+                id="modalReadMore"
+                href="#"
+                class="btn btn-primary"
+                target="_blank"
+                >Read more</a
+              >
+              <button
+                id="copyLinkBtn"
+                class="btn btn-outline-secondary"
+                onclick="copyModalLink()"
+              >
+                Copy Link
+              </button>
             </div>
           </div>
           <div class="modal-footer">
@@ -160,7 +172,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="filterModalTitle">Filters</h5>
-            <button id="filterModalClose" type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <button
+              id="filterModalClose"
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
           </div>
           <div class="modal-body">
             <div class="mb-3">
@@ -168,58 +185,146 @@
               <details>
                 <summary id="summaryRisk">Risk &amp; Tensions 🔴</summary>
                 <div class="form-check">
-                  <input class="form-check-input category-filter" type="checkbox" value="Violent Incidents" id="cat-violent" />
-                  <label class="form-check-label" for="cat-violent">Violent Incidents</label>
+                  <input
+                    class="form-check-input category-filter"
+                    type="checkbox"
+                    value="Violent Incidents"
+                    id="cat-violent"
+                  />
+                  <label class="form-check-label" for="cat-violent"
+                    >Violent Incidents</label
+                  >
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input category-filter" type="checkbox" value="Hate Speech &amp; Provocative Statements" id="cat-hate" />
-                  <label class="form-check-label" for="cat-hate">Hate Speech &amp; Provocative Statements</label>
+                  <input
+                    class="form-check-input category-filter"
+                    type="checkbox"
+                    value="Hate Speech &amp; Provocative Statements"
+                    id="cat-hate"
+                  />
+                  <label class="form-check-label" for="cat-hate"
+                    >Hate Speech &amp; Provocative Statements</label
+                  >
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input category-filter" type="checkbox" value="Institutional Obstruction" id="cat-obstruction" />
-                  <label class="form-check-label" for="cat-obstruction">Institutional Obstruction</label>
+                  <input
+                    class="form-check-input category-filter"
+                    type="checkbox"
+                    value="Institutional Obstruction"
+                    id="cat-obstruction"
+                  />
+                  <label class="form-check-label" for="cat-obstruction"
+                    >Institutional Obstruction</label
+                  >
                 </div>
               </details>
               <details class="mt-2">
                 <summary id="summaryPositive">Positive Developments 🟢</summary>
                 <div class="form-check">
-                  <input class="form-check-input category-filter" type="checkbox" value="Interethnic Cooperation Initiatives" id="cat-coop" />
-                  <label class="form-check-label" for="cat-coop">Interethnic Cooperation Initiatives</label>
+                  <input
+                    class="form-check-input category-filter"
+                    type="checkbox"
+                    value="Interethnic Cooperation Initiatives"
+                    id="cat-coop"
+                  />
+                  <label class="form-check-label" for="cat-coop"
+                    >Interethnic Cooperation Initiatives</label
+                  >
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input category-filter" type="checkbox" value="Community Dialogues &amp; Roundtables" id="cat-dialogue" />
-                  <label class="form-check-label" for="cat-dialogue">Community Dialogues &amp; Roundtables</label>
+                  <input
+                    class="form-check-input category-filter"
+                    type="checkbox"
+                    value="Community Dialogues &amp; Roundtables"
+                    id="cat-dialogue"
+                  />
+                  <label class="form-check-label" for="cat-dialogue"
+                    >Community Dialogues &amp; Roundtables</label
+                  >
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input category-filter" type="checkbox" value="Inclusive Policy Measures" id="cat-policy" />
-                  <label class="form-check-label" for="cat-policy">Inclusive Policy Measures</label>
+                  <input
+                    class="form-check-input category-filter"
+                    type="checkbox"
+                    value="Inclusive Policy Measures"
+                    id="cat-policy"
+                  />
+                  <label class="form-check-label" for="cat-policy"
+                    >Inclusive Policy Measures</label
+                  >
                 </div>
               </details>
               <details class="mt-2">
-                <summary id="summaryInstitutional">Institutional Responses &amp; Monitoring ⚖️</summary>
+                <summary id="summaryInstitutional">
+                  Institutional Responses &amp; Monitoring ⚖️
+                </summary>
                 <div class="form-check">
-                  <input class="form-check-input category-filter" type="checkbox" value="Arrests &amp; Legal Actions" id="cat-arrests" />
-                  <label class="form-check-label" for="cat-arrests">Arrests &amp; Legal Actions</label>
+                  <input
+                    class="form-check-input category-filter"
+                    type="checkbox"
+                    value="Arrests &amp; Legal Actions"
+                    id="cat-arrests"
+                  />
+                  <label class="form-check-label" for="cat-arrests"
+                    >Arrests &amp; Legal Actions</label
+                  >
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input category-filter" type="checkbox" value="Reports &amp; Statements Published" id="cat-reports" />
-                  <label class="form-check-label" for="cat-reports">Reports &amp; Statements Published</label>
+                  <input
+                    class="form-check-input category-filter"
+                    type="checkbox"
+                    value="Reports &amp; Statements Published"
+                    id="cat-reports"
+                  />
+                  <label class="form-check-label" for="cat-reports"
+                    >Reports &amp; Statements Published</label
+                  >
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input category-filter" type="checkbox" value="Government or International Interventions" id="cat-interventions" />
-                  <label class="form-check-label" for="cat-interventions">Government or International Interventions</label>
+                  <input
+                    class="form-check-input category-filter"
+                    type="checkbox"
+                    value="Government or International Interventions"
+                    id="cat-interventions"
+                  />
+                  <label class="form-check-label" for="cat-interventions"
+                    >Government or International Interventions</label
+                  >
                 </div>
               </details>
             </div>
             <div class="mb-3">
-              <label class="form-label" id="dateRangeLabel" for="dateRange">Date range</label>
-              <input type="text" id="dateRange" class="form-control" placeholder="Select range" readonly />
+              <label class="form-label" id="dateRangeLabel" for="dateRange"
+                >Date range</label
+              >
+              <input
+                type="text"
+                id="dateRange"
+                class="form-control"
+                placeholder="Select range"
+                readonly
+              />
             </div>
           </div>
           <div class="modal-footer">
-            <button id="clearFilters" type="button" class="btn btn-outline-danger">Clear</button>
-            <button id="cancelFilters" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button id="applyFilters" type="button" class="btn btn-primary">Apply</button>
+            <button
+              id="clearFilters"
+              type="button"
+              class="btn btn-outline-danger"
+            >
+              Clear
+            </button>
+            <button
+              id="cancelFilters"
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button id="applyFilters" type="button" class="btn btn-primary">
+              Apply
+            </button>
           </div>
         </div>
       </div>
@@ -229,8 +334,8 @@
       <small>
         This site is part of a project supported by NED (National Endowment for
         Democracy), titled &#39;Increasing Government Transparency and
-        Accountability in Interethnic Dialogue,&#39; and implemented by KCSS. The
-        authors wrote the specific chapters within their own capacities. As
+        Accountability in Interethnic Dialogue,&#39; and implemented by KCSS.
+        The authors wrote the specific chapters within their own capacities. As
         such, the views presented in this site do not necessarily reflect the
         views of KCSS or NED.
       </small>
