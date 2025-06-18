@@ -13,11 +13,21 @@ body {
 body {
   display: flex;
   flex-direction: column;
+  color: #000;
 }
 
 /* 2. Fixed-height navbar */
 .navbar {
   flex: 0 0 var(--navbar-height);
+  background-color: #fff !important;
+}
+
+.navbar a,
+.navbar button,
+.navbar span,
+.navbar .navbar-brand {
+  color: #0d6efd !important;
+  border-color: #0d6efd !important;
 }
 
 /* 3. Optional search bar (only if you have one above the map) */
