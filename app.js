@@ -346,9 +346,6 @@ function setupFilterControls() {
 
       filterPins();
 
-      const modalEl = document.getElementById("filterModal");
-      const modal = bootstrap.Modal.getInstance(modalEl);
-      if (modal) modal.hide();
     });
   }
 
@@ -386,9 +383,6 @@ function setupFilterControls() {
 
     filterPins();
 
-    const modalEl = document.getElementById("filterModal");
-    const modal = bootstrap.Modal.getInstance(modalEl);
-    if (modal) modal.hide();
   });
 }
 
@@ -442,8 +436,6 @@ function updateUIStrings() {
     .getElementById("searchInput")
     .setAttribute("placeholder", u.searchPlaceholder);
 
-  const filterBtn = document.getElementById("openFilterModal");
-  if (filterBtn) filterBtn.textContent = u.filtersBtn;
 
   document.getElementById("pinModalTitle").textContent = u.pinDetailsTitle;
   const cityLbl = document.getElementById("cityLabel");
@@ -472,8 +464,6 @@ function updateUIStrings() {
   if (clearBtn) clearBtn.textContent = u.clearFilters;
   const applyBtn = document.getElementById("applyFilters");
   if (applyBtn) applyBtn.textContent = u.applyFilters;
-  const cancelBtn = document.getElementById("cancelFilters");
-  if (cancelBtn) cancelBtn.textContent = u.cancel;
   document
     .querySelector("#pinModal .btn-close")
     .setAttribute("aria-label", u.close);
