@@ -34,7 +34,7 @@
             <option value="sq">SQ</option>
             <option value="sr">SR</option>
           </select>
-          <button class="btn btn-sm btn-outline-light" onclick="logout()">
+          <button class="btn btn-sm btn-outline-dark" onclick="logout()">
             Logout
           </button>
         </div>
@@ -105,8 +105,16 @@
             </button>
           </li>
         </ul>
-        <div class="tab-content border border-top-0 p-3 mb-3" id="langTabsContent">
-          <div class="tab-pane fade show active" id="pane-en" role="tabpanel" aria-labelledby="tab-en">
+        <div
+          class="tab-content border border-top-0 p-3 mb-3"
+          id="langTabsContent"
+        >
+          <div
+            class="tab-pane fade show active"
+            id="pane-en"
+            role="tabpanel"
+            aria-labelledby="tab-en"
+          >
             <div class="mb-3">
               <label for="title_en" class="form-label">Title (English)</label>
               <input
@@ -118,11 +126,18 @@
               />
             </div>
             <div class="mb-3">
-              <label for="desc_en" class="form-label">Description (English)</label>
+              <label for="desc_en" class="form-label"
+                >Description (English)</label
+              >
               <textarea id="desc_en" class="form-control" rows="3"></textarea>
             </div>
           </div>
-          <div class="tab-pane fade" id="pane-sq" role="tabpanel" aria-labelledby="tab-sq">
+          <div
+            class="tab-pane fade"
+            id="pane-sq"
+            role="tabpanel"
+            aria-labelledby="tab-sq"
+          >
             <div class="mb-3">
               <label for="title_sq" class="form-label">Titulli (Shqip)</label>
               <input type="text" class="form-control" id="title_sq" />
@@ -132,7 +147,12 @@
               <textarea id="desc_sq" class="form-control" rows="3"></textarea>
             </div>
           </div>
-          <div class="tab-pane fade" id="pane-sr" role="tabpanel" aria-labelledby="tab-sr">
+          <div
+            class="tab-pane fade"
+            id="pane-sr"
+            role="tabpanel"
+            aria-labelledby="tab-sr"
+          >
             <div class="mb-3">
               <label for="title_sr" class="form-label">Наслов (Srpski)</label>
               <input type="text" class="form-control" id="title_sr" />
@@ -148,20 +168,41 @@
           <label for="category" class="form-label">Category</label>
           <select id="category" class="form-select">
             <option value="Violent Incidents">Violent Incidents</option>
-            <option value="Hate Speech &amp; Provocative Statements">Hate Speech &amp; Provocative Statements</option>
-            <option value="Institutional Obstruction">Institutional Obstruction</option>
-            <option value="Interethnic Cooperation Initiatives">Interethnic Cooperation Initiatives</option>
-            <option value="Community Dialogues &amp; Roundtables">Community Dialogues &amp; Roundtables</option>
-            <option value="Inclusive Policy Measures">Inclusive Policy Measures</option>
-            <option value="Arrests &amp; Legal Actions">Arrests &amp; Legal Actions</option>
-            <option value="Reports &amp; Statements Published">Reports &amp; Statements Published</option>
-            <option value="Government or International Interventions">Government or International Interventions</option>
+            <option value="Hate Speech &amp; Provocative Statements">
+              Hate Speech &amp; Provocative Statements
+            </option>
+            <option value="Institutional Obstruction">
+              Institutional Obstruction
+            </option>
+            <option value="Interethnic Cooperation Initiatives">
+              Interethnic Cooperation Initiatives
+            </option>
+            <option value="Community Dialogues &amp; Roundtables">
+              Community Dialogues &amp; Roundtables
+            </option>
+            <option value="Inclusive Policy Measures">
+              Inclusive Policy Measures
+            </option>
+            <option value="Arrests &amp; Legal Actions">
+              Arrests &amp; Legal Actions
+            </option>
+            <option value="Reports &amp; Statements Published">
+              Reports &amp; Statements Published
+            </option>
+            <option value="Government or International Interventions">
+              Government or International Interventions
+            </option>
           </select>
         </div>
 
         <div class="col-md-6">
           <label for="city" class="form-label">City (optional)</label>
-          <input type="text" class="form-control" id="city" placeholder="Pristina" />
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            placeholder="Pristina"
+          />
         </div>
         <div class="col-md-3">
           <label for="lat" class="form-label">Latitude</label>
@@ -186,7 +227,11 @@
           />
         </div>
         <div class="col-12">
-          <button type="button" class="btn btn-outline-secondary w-100" id="copyCoordsBtn">
+          <button
+            type="button"
+            class="btn btn-outline-secondary w-100"
+            id="copyCoordsBtn"
+          >
             Copy Coordinates
           </button>
         </div>
@@ -197,13 +242,18 @@
             class="form-control"
             id="url"
             placeholder="https://example.com/news"
-          required
-        />
-      </div>
-      <div class="col-md-6">
-        <label for="timestamp" class="form-label">Event Time</label>
-        <input type="datetime-local" class="form-control" id="timestamp" required />
-      </div>
+            required
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="timestamp" class="form-label">Event Time</label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            id="timestamp"
+            required
+          />
+        </div>
         <div class="col-12" style="padding-bottom: 10px">
           <button type="submit" class="btn btn-success">Submit</button>
           <a href="../" class="btn btn-secondary ms-2">⬅ Back</a>
@@ -260,26 +310,30 @@
         placeMarker(lat, lng);
       });
 
-      document.getElementById("searchBtn").addEventListener("click", async () => {
-        const query = document.getElementById("addressSearch").value.trim();
-        if (!query) return;
-        try {
-          const res = await fetch(
-            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`
-          );
-          const data = await res.json();
-          if (data.length > 0) {
-            const lat = parseFloat(data[0].lat);
-            const lng = parseFloat(data[0].lon);
-            map.setView([lat, lng], 13);
-            placeMarker(lat, lng);
-          } else {
-            alert("Location not found.");
+      document
+        .getElementById("searchBtn")
+        .addEventListener("click", async () => {
+          const query = document.getElementById("addressSearch").value.trim();
+          if (!query) return;
+          try {
+            const res = await fetch(
+              `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(
+                query
+              )}`
+            );
+            const data = await res.json();
+            if (data.length > 0) {
+              const lat = parseFloat(data[0].lat);
+              const lng = parseFloat(data[0].lon);
+              map.setView([lat, lng], 13);
+              placeMarker(lat, lng);
+            } else {
+              alert("Location not found.");
+            }
+          } catch (err) {
+            alert("Geocoding failed.");
           }
-        } catch (err) {
-          alert("Geocoding failed.");
-        }
-      });
+        });
 
       document.getElementById("copyCoordsBtn").addEventListener("click", () => {
         const lat = document.getElementById("lat").value;
@@ -353,7 +407,9 @@
             lng,
             city: city || null,
             articleUrl: document.getElementById("url").value.trim(),
-            timestamp: new Date(document.getElementById("timestamp").value).toISOString(),
+            timestamp: new Date(
+              document.getElementById("timestamp").value
+            ).toISOString(),
           };
           try {
             const res = await fetch(`${PINS_API_URL}/admin`, {
