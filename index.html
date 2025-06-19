@@ -101,16 +101,149 @@
           class="form-control mb-3"
           placeholder="Filter by title..."
         />
+        <div id="filterSection" class="mb-3">
+          <h6 id="filterModalTitle">Filters</h6>
+          <div class="mb-3">
+            <h6 id="categoriesHeading">Categories</h6>
+            <details>
+              <summary id="summaryRisk">Risk &amp; Tensions 🔴</summary>
+              <div class="form-check">
+                <input
+                  class="form-check-input category-filter"
+                  type="checkbox"
+                  value="Violent Incidents"
+                  id="cat-violent"
+                />
+                <label class="form-check-label" for="cat-violent"
+                  >Violent Incidents</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input category-filter"
+                  type="checkbox"
+                  value="Hate Speech &amp; Provocative Statements"
+                  id="cat-hate"
+                />
+                <label class="form-check-label" for="cat-hate"
+                  >Hate Speech &amp; Provocative Statements</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input category-filter"
+                  type="checkbox"
+                  value="Institutional Obstruction"
+                  id="cat-obstruction"
+                />
+                <label class="form-check-label" for="cat-obstruction"
+                  >Institutional Obstruction</label
+                >
+              </div>
+            </details>
+            <details class="mt-2">
+              <summary id="summaryPositive">Positive Developments 🟢</summary>
+              <div class="form-check">
+                <input
+                  class="form-check-input category-filter"
+                  type="checkbox"
+                  value="Interethnic Cooperation Initiatives"
+                  id="cat-coop"
+                />
+                <label class="form-check-label" for="cat-coop"
+                  >Interethnic Cooperation Initiatives</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input category-filter"
+                  type="checkbox"
+                  value="Community Dialogues &amp; Roundtables"
+                  id="cat-dialogue"
+                />
+                <label class="form-check-label" for="cat-dialogue"
+                  >Community Dialogues &amp; Roundtables</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input category-filter"
+                  type="checkbox"
+                  value="Inclusive Policy Measures"
+                  id="cat-policy"
+                />
+                <label class="form-check-label" for="cat-policy"
+                  >Inclusive Policy Measures</label
+                >
+              </div>
+            </details>
+            <details class="mt-2">
+              <summary id="summaryInstitutional">
+                Institutional Responses &amp; Monitoring ⚖️
+              </summary>
+              <div class="form-check">
+                <input
+                  class="form-check-input category-filter"
+                  type="checkbox"
+                  value="Arrests &amp; Legal Actions"
+                  id="cat-arrests"
+                />
+                <label class="form-check-label" for="cat-arrests"
+                  >Arrests &amp; Legal Actions</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input category-filter"
+                  type="checkbox"
+                  value="Reports &amp; Statements Published"
+                  id="cat-reports"
+                />
+                <label class="form-check-label" for="cat-reports"
+                  >Reports &amp; Statements Published</label
+                >
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input category-filter"
+                  type="checkbox"
+                  value="Government or International Interventions"
+                  id="cat-interventions"
+                />
+                <label class="form-check-label" for="cat-interventions"
+                  >Government or International Interventions</label
+                >
+              </div>
+            </details>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" id="dateRangeLabel" for="dateRange"
+              >Date range</label
+            >
+            <input
+              type="text"
+              id="dateRange"
+              class="form-control"
+              placeholder="Select range"
+              readonly
+            />
+          </div>
+          <div class="d-flex gap-2">
+            <button
+              id="clearFilters"
+              type="button"
+              class="btn btn-outline-danger flex-fill"
+            >
+              Clear
+            </button>
+            <button id="applyFilters" type="button" class="btn btn-primary flex-fill">
+              Apply
+            </button>
+          </div>
+        </div>
+        <hr />
         <ul id="pinList" class="list-group"></ul>
         <hr />
-        <button
-          id="openFilterModal"
-          class="btn btn-outline-secondary w-100"
-          data-bs-toggle="modal"
-          data-bs-target="#filterModal"
-        >
-          Filters
-        </button>
       </aside>
 
       <div id="map" class="flex-grow-1 position-relative"></div>
@@ -167,168 +300,6 @@
       </div>
     </div>
 
-    <div class="modal fade" id="filterModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="filterModalTitle">Filters</h5>
-            <button
-              id="filterModalClose"
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <div class="mb-3">
-              <h6 id="categoriesHeading">Categories</h6>
-              <details>
-                <summary id="summaryRisk">Risk &amp; Tensions 🔴</summary>
-                <div class="form-check">
-                  <input
-                    class="form-check-input category-filter"
-                    type="checkbox"
-                    value="Violent Incidents"
-                    id="cat-violent"
-                  />
-                  <label class="form-check-label" for="cat-violent"
-                    >Violent Incidents</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input category-filter"
-                    type="checkbox"
-                    value="Hate Speech &amp; Provocative Statements"
-                    id="cat-hate"
-                  />
-                  <label class="form-check-label" for="cat-hate"
-                    >Hate Speech &amp; Provocative Statements</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input category-filter"
-                    type="checkbox"
-                    value="Institutional Obstruction"
-                    id="cat-obstruction"
-                  />
-                  <label class="form-check-label" for="cat-obstruction"
-                    >Institutional Obstruction</label
-                  >
-                </div>
-              </details>
-              <details class="mt-2">
-                <summary id="summaryPositive">Positive Developments 🟢</summary>
-                <div class="form-check">
-                  <input
-                    class="form-check-input category-filter"
-                    type="checkbox"
-                    value="Interethnic Cooperation Initiatives"
-                    id="cat-coop"
-                  />
-                  <label class="form-check-label" for="cat-coop"
-                    >Interethnic Cooperation Initiatives</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input category-filter"
-                    type="checkbox"
-                    value="Community Dialogues &amp; Roundtables"
-                    id="cat-dialogue"
-                  />
-                  <label class="form-check-label" for="cat-dialogue"
-                    >Community Dialogues &amp; Roundtables</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input category-filter"
-                    type="checkbox"
-                    value="Inclusive Policy Measures"
-                    id="cat-policy"
-                  />
-                  <label class="form-check-label" for="cat-policy"
-                    >Inclusive Policy Measures</label
-                  >
-                </div>
-              </details>
-              <details class="mt-2">
-                <summary id="summaryInstitutional">
-                  Institutional Responses &amp; Monitoring ⚖️
-                </summary>
-                <div class="form-check">
-                  <input
-                    class="form-check-input category-filter"
-                    type="checkbox"
-                    value="Arrests &amp; Legal Actions"
-                    id="cat-arrests"
-                  />
-                  <label class="form-check-label" for="cat-arrests"
-                    >Arrests &amp; Legal Actions</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input category-filter"
-                    type="checkbox"
-                    value="Reports &amp; Statements Published"
-                    id="cat-reports"
-                  />
-                  <label class="form-check-label" for="cat-reports"
-                    >Reports &amp; Statements Published</label
-                  >
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input category-filter"
-                    type="checkbox"
-                    value="Government or International Interventions"
-                    id="cat-interventions"
-                  />
-                  <label class="form-check-label" for="cat-interventions"
-                    >Government or International Interventions</label
-                  >
-                </div>
-              </details>
-            </div>
-            <div class="mb-3">
-              <label class="form-label" id="dateRangeLabel" for="dateRange"
-                >Date range</label
-              >
-              <input
-                type="text"
-                id="dateRange"
-                class="form-control"
-                placeholder="Select range"
-                readonly
-              />
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              id="clearFilters"
-              type="button"
-              class="btn btn-outline-danger"
-            >
-              Clear
-            </button>
-            <button
-              id="cancelFilters"
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cancel
-            </button>
-            <button id="applyFilters" type="button" class="btn btn-primary">
-              Apply
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <footer class="bg-white text-dark text-center py-0.5">
       <small>
