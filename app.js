@@ -39,7 +39,6 @@ const UI_STRINGS = {
     institutionalSummary: "Institutional Responses & Monitoring ⚖️",
     dateRangeLabel: "Date range",
     dateRangeTo: "to",
-    applyFilters: "Apply",
     clearFilters: "Clear",
     cancel: "Cancel",
     readMore: "Read more",
@@ -81,7 +80,6 @@ const UI_STRINGS = {
     institutionalSummary: "Përgjigjet Institucionale & Monitorimi ⚖️",
     dateRangeLabel: "Periudha",
     dateRangeTo: "deri",
-    applyFilters: "Apliko",
     clearFilters: "Pastro",
     cancel: "Anulo",
     readMore: "Lexo më shumë",
@@ -123,7 +121,6 @@ const UI_STRINGS = {
     institutionalSummary: "Institucionalni Odgovori & Monitoring ⚖️",
     dateRangeLabel: "Vremenski period",
     dateRangeTo: "do",
-    applyFilters: "Primeni",
     clearFilters: "Obriši",
     cancel: "Otkaži",
     readMore: "Pročitaj više",
@@ -316,45 +313,26 @@ function setupSearchUI() {
 
 function setupFilterControls() {
   const rangeInput = document.getElementById("dateRange");
-  const applyBtn = document.getElementById("applyFilters");
   const clearBtn = document.getElementById("clearFilters");
 
+  const now = new Date();
+  const currentMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+
   const fp = rangeInput
-    ? flatpickr(rangeInput, { mode: "range", dateFormat: "Y-m-d" })
+    ? flatpickr(rangeInput, {
+        mode: "range",
+        dateFormat: "Y-m",
+        defaultDate: [currentMonthStart, currentMonthStart],
+        plugins: [monthSelectPlugin({ shorthand: true, dateFormat: "Y-m", altFormat: "F Y" })],
+      })
     : null;
 
-  if (clearBtn) {
-    clearBtn.addEventListener("click", async () => {
-      document
-        .querySelectorAll(".category-filter")
-        .forEach((c) => (c.checked = false));
-      if (fp) fp.clear();
-      startFilter = null;
-      endFilter = null;
-      activeCategories = new Set();
-
-      try {
-        const raw = await fetchPins();
-        allPins = raw.map((pin) => {
-          normalizePinTitle(pin);
-          normalizePinDescription(pin);
-          return pin;
-        });
-      } catch (e) {
-        console.error("Error fetching pins:", e);
-      }
-
-      filterPins();
-
-    });
-  }
-
-  if (!applyBtn) return;
-
-  applyBtn.addEventListener("click", async () => {
+  async function applyFilters() {
     if (fp && fp.selectedDates.length) {
-      startFilter = fp.selectedDates[0];
-      endFilter = fp.selectedDates[1] || fp.selectedDates[0];
+      const startMonth = fp.selectedDates[0];
+      const endMonth = fp.selectedDates[1] || fp.selectedDates[0];
+      startFilter = new Date(startMonth.getFullYear(), startMonth.getMonth(), 1);
+      endFilter = new Date(endMonth.getFullYear(), endMonth.getMonth() + 1, 0);
     } else {
       startFilter = null;
       endFilter = null;
@@ -382,8 +360,41 @@ function setupFilterControls() {
     }
 
     filterPins();
+  }
 
+  if (clearBtn) {
+    clearBtn.addEventListener("click", async () => {
+      document
+        .querySelectorAll(".category-filter")
+        .forEach((c) => (c.checked = false));
+      if (fp) fp.clear();
+      startFilter = null;
+      endFilter = null;
+      activeCategories = new Set();
+
+      try {
+        const raw = await fetchPins();
+        allPins = raw.map((pin) => {
+          normalizePinTitle(pin);
+          normalizePinDescription(pin);
+          return pin;
+        });
+      } catch (e) {
+        console.error("Error fetching pins:", e);
+      }
+
+      filterPins();
+
+    });
+  }
+
+  document.querySelectorAll(".category-filter").forEach((c) => {
+    c.addEventListener("change", applyFilters);
   });
+
+  if (fp) fp.config.onChange.push(applyFilters);
+
+  applyFilters();
 }
 
 function setupSidebarToggle() {
@@ -462,8 +473,6 @@ function updateUIStrings() {
   if (dateLbl) dateLbl.textContent = u.dateRangeLabel;
   const clearBtn = document.getElementById("clearFilters");
   if (clearBtn) clearBtn.textContent = u.clearFilters;
-  const applyBtn = document.getElementById("applyFilters");
-  if (applyBtn) applyBtn.textContent = u.applyFilters;
   document
     .querySelector("#pinModal .btn-close")
     .setAttribute("aria-label", u.close);

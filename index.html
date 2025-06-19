@@ -26,6 +26,7 @@
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="vendor/flatpickr.min.css" />
+    <link rel="stylesheet" href="vendor/flatpickr.monthSelect.css" />
   </head>
   <body class="d-flex flex-column vh-100">
     <nav class="navbar navbar-expand-lg bg-white">
@@ -224,7 +225,7 @@
               type="text"
               id="dateRange"
               class="form-control"
-              placeholder="Select range"
+              placeholder="Select months"
               readonly
             />
           </div>
@@ -235,9 +236,6 @@
               class="btn btn-outline-danger flex-fill"
             >
               Clear
-            </button>
-            <button id="applyFilters" type="button" class="btn btn-primary flex-fill">
-              Apply
             </button>
           </div>
         </div>
@@ -319,6 +317,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js"></script>
     <script src="vendor/flatpickr.min.js"></script>
+    <script src="vendor/flatpickr.monthSelect.js"></script>
     <script src="config.js"></script>
     <script src="app.js"></script>
   </body>
