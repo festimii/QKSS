@@ -61,6 +61,13 @@ a:hover {
   border-color: var(--navbar-link) !important;
 }
 
+/* Ensure navbar buttons are legible on hover in light mode */
+[data-bs-theme="light"] .navbar .btn:hover {
+  background-color: var(--navbar-link) !important;
+  color: #fff !important;
+  border-color: var(--navbar-link) !important;
+}
+
 /* 3. Optional search bar (only if you have one above the map) */
 #searchBar {
   flex: 0 0 var(--search-height);
@@ -174,4 +181,22 @@ footer {
 
 [data-bs-theme="dark"] .text-muted {
   color: #b5b5b5 !important;
+}
+
+@keyframes markerBounce {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.marker-animate {
+  animation: markerBounce 0.4s ease-out;
 }

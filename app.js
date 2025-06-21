@@ -230,6 +230,12 @@ function addMarkers(pins) {
         }</a>`
       )
       .on("click", () => showPinDetails(pin));
+
+    marker.on("add", () => {
+      const el = marker.getElement();
+      if (el) el.classList.add("marker-animate");
+    });
+
     markers.push(marker);
   });
 }
