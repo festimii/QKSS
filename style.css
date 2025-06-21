@@ -9,6 +9,13 @@
   --bs-body-color: var(--main-text);
 }
 
+/* Smooth theme transitions */
+body,
+.navbar,
+.list-group-item {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 [data-bs-theme="dark"] {
   --main-bg: #212529;
   --main-text: #f8f9fa;
@@ -39,6 +46,14 @@ body {
   flex-direction: column;
   color: var(--main-text);
   background-color: var(--main-bg);
+}
+
+a {
+  color: var(--navbar-link);
+  transition: color 0.3s ease;
+}
+a:hover {
+  opacity: 0.8;
 }
 
 /* 2. Fixed-height navbar */
@@ -73,14 +88,29 @@ body {
   flex: 1;
   width: 100%;
   height: 100%; /* redundant with flex:1 but safe */
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* 6. Pin list hover/active styling */
 #pinList li:hover,
 #pinList li:active {
   cursor: pointer;
-  background-color: #f1f1f1;
-  color: #000;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--main-text);
+}
+
+[data-bs-theme="dark"] #pinList li:hover,
+[data-bs-theme="dark"] #pinList li:active {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* 7. Safe-area support (iPhone notch, etc.) */
@@ -132,6 +162,12 @@ body {
 footer {
   background-color: var(--navbar-bg) !important;
   color: var(--main-text) !important;
+}
+
+/* Dark theme list groups */
+[data-bs-theme="dark"] .list-group-item {
+  background-color: #343a40;
+  color: var(--main-text);
 }
 
 /* Ensure outline-dark buttons remain visible in dark mode */
