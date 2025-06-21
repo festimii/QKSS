@@ -1,6 +1,17 @@
 :root {
   --navbar-height: 56px; /* Bootstrap default */
   --search-height: 60px; /* adjust to your mobile search bar */
+  --main-bg: #ffffff;
+  --main-text: #000000;
+  --navbar-bg: #ffffff;
+  --navbar-link: #108edde6;
+}
+
+[data-bs-theme="dark"] {
+  --main-bg: #212529;
+  --main-text: #f8f9fa;
+  --navbar-bg: #343a40;
+  --navbar-link: #93cdff;
 }
 
 /* 1. Full-screen flex container */
@@ -13,21 +24,22 @@ body {
 body {
   display: flex;
   flex-direction: column;
-  color: #000;
+  color: var(--main-text);
+  background-color: var(--main-bg);
 }
 
 /* 2. Fixed-height navbar */
 .navbar {
   flex: 0 0 var(--navbar-height);
-  background-color: #fff !important;
+  background-color: var(--navbar-bg) !important;
 }
 
 .navbar a,
 .navbar button,
 .navbar span,
 .navbar .navbar-brand {
-  color: #108edde6 !important;
-  border-color: #108edde6 !important;
+  color: var(--navbar-link) !important;
+  border-color: var(--navbar-link) !important;
 }
 
 /* 3. Optional search bar (only if you have one above the map) */
@@ -101,4 +113,9 @@ body {
 /* News page */
 .news-card {
   max-width: 860px;
+}
+
+footer {
+  background-color: var(--navbar-bg) !important;
+  color: var(--main-text) !important;
 }
