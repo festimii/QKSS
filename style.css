@@ -4,7 +4,7 @@
   --main-bg: #ffffff;
   --main-text: #000000;
   --navbar-bg: #ffffff;
-  --navbar-link: #108edde6;
+  --navbar-link: #343a40;
   --bs-body-bg: var(--main-bg);
   --bs-body-color: var(--main-text);
 }
@@ -80,6 +80,7 @@ body {
 #pinList li:active {
   cursor: pointer;
   background-color: #f1f1f1;
+  color: #000;
 }
 
 /* 7. Safe-area support (iPhone notch, etc.) */
