@@ -1,4 +1,4 @@
-const THEMES = ["light", "dark", "qkss"];
+const THEMES = ["light", "dark"];
 
 function setTheme(theme) {
   // 1) Apply BS data-theme & persist
@@ -9,7 +9,7 @@ function setTheme(theme) {
   const sidebar = document.getElementById("sidebar");
   if (sidebar) {
     sidebar.classList.remove("bg-light", "bg-dark");
-    if (theme === "light" || theme === "qkss") {
+    if (theme === "light") {
       sidebar.classList.add("bg-light");
     } else if (theme === "dark") {
       sidebar.classList.add("bg-dark");
@@ -31,20 +31,20 @@ function setTheme(theme) {
   } else if (theme === "dark") {
     btn.classList.add("btn-outline-primary");
     btn.innerHTML = '<i class="bi bi-sun"></i>';
-  } else if (theme === "qkss") {
-    btn.classList.add("btn-outline-light");
-    btn.innerHTML = '<i class="bi bi-moon-stars"></i>';
   }
 }
 
 function toggleTheme() {
-  const current = localStorage.getItem("theme") || "light";
+  const stored = localStorage.getItem("theme");
+  const current = THEMES.includes(stored) ? stored : "light";
   const nextIndex = (THEMES.indexOf(current) + 1) % THEMES.length;
   setTheme(THEMES[nextIndex]);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  setTheme(localStorage.getItem("theme") || "light");
+  const stored = localStorage.getItem("theme");
+  const initial = THEMES.includes(stored) ? stored : "light";
+  setTheme(initial);
   const btn = document.getElementById("themeToggle");
   if (btn) btn.addEventListener("click", toggleTheme);
 });
