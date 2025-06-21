@@ -5,6 +5,8 @@
   --main-text: #000000;
   --navbar-bg: #ffffff;
   --navbar-link: #108edde6;
+  --bs-body-bg: var(--main-bg);
+  --bs-body-color: var(--main-text);
 }
 
 [data-bs-theme="dark"] {
@@ -12,6 +14,8 @@
   --main-text: #f8f9fa;
   --navbar-bg: #343a40;
   --navbar-link: #93cdff;
+  --bs-body-bg: var(--main-bg);
+  --bs-body-color: var(--main-text);
 }
 
 /* 1. Full-screen flex container */
@@ -121,7 +125,16 @@ footer {
 }
 
 /* Ensure outline-dark buttons remain visible in dark mode */
-[data-bs-theme="dark"] .btn-outline-dark {
+[data-bs-theme="dark"] [class*="btn-outline-"] {
   color: var(--main-text) !important;
   border-color: var(--main-text) !important;
+}
+
+[data-bs-theme="dark"] [class*="btn-outline-"]:hover {
+  background-color: var(--main-text) !important;
+  color: var(--main-bg) !important;
+}
+
+[data-bs-theme="dark"] .text-muted {
+  color: #b5b5b5 !important;
 }
