@@ -18,6 +18,15 @@
   --bs-body-color: var(--main-text);
 }
 
+[data-bs-theme="qkss"] {
+  --main-bg: #ffffff;
+  --main-text: #000000;
+  --navbar-bg: #108edd;
+  --navbar-link: #ffffff;
+  --bs-body-bg: var(--main-bg);
+  --bs-body-color: var(--main-text);
+}
+
 /* 1. Full-screen flex container */
 html,
 body {
