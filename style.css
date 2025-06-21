@@ -119,3 +119,9 @@ footer {
   background-color: var(--navbar-bg) !important;
   color: var(--main-text) !important;
 }
+
+/* Ensure outline-dark buttons remain visible in dark mode */
+[data-bs-theme="dark"] .btn-outline-dark {
+  color: var(--main-text) !important;
+  border-color: var(--main-text) !important;
+}
