@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="vendor/flatpickr.monthSelect.css" />
   </head>
   <body class="d-flex flex-column vh-100">
-    <nav class="navbar navbar-expand-lg bg-white">
+    <nav class="navbar navbar-expand-lg bg-body">
       <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="/">
           <img src="KCSS-logo.png" alt="KCSS logo" height="40" class="me-2" />
@@ -83,6 +83,9 @@
             <a class="btn btn-outline-light me-2" href="about.html">About</a>
             <button class="btn btn-outline-light" id="toggleSidebar">
               <i class="bi bi-layout-sidebar"></i>
+            </button>
+            <button class="btn btn-outline-dark" id="themeToggle">
+              <i class="bi bi-moon"></i>
             </button>
           </div>
         </div>
@@ -297,7 +300,7 @@
       </div>
     </div>
 
-    <footer class="bg-white text-dark text-center py-0.5">
+    <footer class="text-center py-0.5">
       <small>
         This site is part of a project supported by NED (National Endowment for
         Democracy), titled &#39;Increasing Government Transparency and
@@ -317,6 +320,7 @@
     <script src="vendor/flatpickr.min.js"></script>
     <script src="vendor/flatpickr.monthSelect.js"></script>
     <script src="config.js"></script>
+    <script src="theme.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

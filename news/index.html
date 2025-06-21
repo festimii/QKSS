@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../style.css" />
   </head>
   <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg bg-white">
+    <nav class="navbar navbar-expand-lg bg-body">
       <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="/">
           <img
@@ -71,6 +71,9 @@
               </li>
             </ul>
           </div>
+          <button class="btn btn-outline-dark ms-2" id="themeToggle">
+            <i class="bi bi-moon"></i>
+          </button>
         </div>
       </div>
     </nav>
@@ -107,7 +110,7 @@
       </article>
     </main>
 
-    <footer class="bg-dark text-light text-center py-2 mt-auto">
+    <footer class="text-center py-2 mt-auto">
       <small
         >This site is part of a project supported by NED (National Endowment for
         Democracy), titled 'Increasing Government Transparency and
@@ -123,6 +126,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="../config.js"></script>
+    <script src="../theme.js"></script>
     <script>
       function getLang() {
         return localStorage.getItem("lang") || "en";
