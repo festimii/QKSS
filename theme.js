@@ -16,6 +16,16 @@ function setTheme(theme) {
     }
   }
 
+  const modal = document.getElementById("modalc");
+  if (modal) {
+    modal.classList.remove("bg-light", "bg-dark");
+    if (theme === "light") {
+      modal.classList.add("bg-light");
+    } else if (theme === "dark") {
+      modal.classList.add("bg-dark");
+    }
+  }
+
   // 3) Update toggle button
   const btn = document.getElementById("themeToggle");
   if (!btn) return;
