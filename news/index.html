@@ -56,17 +56,17 @@
             >
               <li>
                 <button class="dropdown-item lang-option" data-lang="en">
-        btn.addEventListener("click", () => { setLang(btn.dataset.lang); loadNews(); });
+                  English
                 </button>
               </li>
               <li>
                 <button class="dropdown-item lang-option" data-lang="sq">
-        btn.addEventListener("click", () => { setLang(btn.dataset.lang); loadNews(); });
+                  Shqip
                 </button>
               </li>
               <li>
                 <button class="dropdown-item lang-option" data-lang="sr">
-        btn.addEventListener("click", () => { setLang(btn.dataset.lang); loadNews(); });
+                  Srpski
                 </button>
               </li>
             </ul>
@@ -132,34 +132,11 @@
     <script src="../site.js"></script>
 
     <script>
-      const UI_STRINGS = {
-        en: {
-          externalLink: "Open Original Article",
-          back: "\u2190 Back to Map",
-          coordsLabel: "Coordinates:",
-          categoryLabel: "City:",
-          copyLink: "Copy Link",
-          copied: "Copied!",
-        },
-        sq: {
-          externalLink: "Hape Artikullin",
-          back: "\u2190 Kthehu te Harta",
-          coordsLabel: "Koordinatat:",
-          categoryLabel: "Qyteti:",
-          copyLink: "Kopjo Lidhjen",
-          copied: "U kopjua!",
-        },
-        sr: {
-          externalLink: "Otvorite Članak",
-          back: "\u2190 Nazad na mapu",
-          coordsLabel: "Koordinate:",
-          categoryLabel: "Цити:",
-          copyLink: "Kopiraj Link",
-          copied: "Kopirano!",
-        },
-      };
       document.querySelectorAll(".lang-option").forEach((btn) => {
-        btn.addEventListener("click", () => { setLang(btn.dataset.lang); loadNews(); });
+        btn.addEventListener("click", () => {
+          setLang(btn.dataset.lang);
+          loadNews();
+        });
       });
       updateLangDropdownDisplay();
 

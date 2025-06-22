@@ -40,6 +40,12 @@ const UI_STRINGS = {
     readMore: "Read more",
     copyLink: "Copy Link",
     copied: "Copied!",
+    externalLink: "Open Original Article",
+    back: "\u2190 Back to Map",
+    coordsLabel: "Coordinates:",
+    categoryLabel: "City:",
+    copyLink: "Copy Link",
+    copied: "Copied!",
   },
   sq: {
     locations: "Vendndodhjet",
@@ -80,6 +86,12 @@ const UI_STRINGS = {
     clearFilters: "Pastro",
     cancel: "Anulo",
     readMore: "Lexo më shumë",
+    copyLink: "Kopjo Lidhjen",
+    copied: "U kopjua!",
+    externalLink: "Hape Artikullin",
+    back: "\u2190 Kthehu te Harta",
+    coordsLabel: "Koordinatat:",
+    categoryLabel: "Qyteti:",
     copyLink: "Kopjo Lidhjen",
     copied: "U kopjua!",
   },
@@ -124,13 +136,18 @@ const UI_STRINGS = {
     readMore: "Pročitaj više",
     copyLink: "Kopiraj Link",
     copied: "Kopirano!",
+    externalLink: "Otvorite Članak",
+    back: "\u2190 Nazad na mapu",
+    coordsLabel: "Koordinate:",
+    categoryLabel: "Цити:",
+    copyLink: "Kopiraj Link",
+    copied: "Kopirano!",
   },
 };
 
 let map;
 let markers = [];
 let allPins = [];
-
 
 function normalizePinTitle(pin) {
   if (typeof pin.title === "string") {
