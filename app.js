@@ -277,6 +277,12 @@ function filterPins() {
   addMarkers(filtered);
 }
 
+function refreshPinsLanguage() {
+  filterPins();
+}
+
+window.refreshPinsLanguage = refreshPinsLanguage;
+
 function showPinDetails(pin) {
   document.getElementById("pinDescription").textContent =
     getLocalizedDescription(pin);
