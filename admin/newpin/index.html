@@ -358,8 +358,12 @@
         .getElementById("languageSwitcher")
         .addEventListener("change", (e) => {
           setLang(e.target.value);
-          location.reload();
         });
+
+      function refreshPinsLanguage() {
+        location.reload();
+      }
+      window.refreshPinsLanguage = refreshPinsLanguage;
 
       document
         .getElementById("createPinForm")

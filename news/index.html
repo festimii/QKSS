@@ -75,10 +75,14 @@
       document.querySelectorAll(".lang-option").forEach((btn) => {
         btn.addEventListener("click", () => {
           setLang(btn.dataset.lang);
-          loadNews();
         });
       });
       updateLangDropdownDisplay();
+
+      function refreshPinsLanguage() {
+        loadNews();
+      }
+      window.refreshPinsLanguage = refreshPinsLanguage;
 
       async function loadNews() {
         const params = new URLSearchParams(window.location.search);
