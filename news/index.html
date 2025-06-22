@@ -56,17 +56,17 @@
             >
               <li>
                 <button class="dropdown-item lang-option" data-lang="en">
-                  English
+        btn.addEventListener("click", () => { setLang(btn.dataset.lang); loadNews(); });
                 </button>
               </li>
               <li>
                 <button class="dropdown-item lang-option" data-lang="sq">
-                  Shqip
+        btn.addEventListener("click", () => { setLang(btn.dataset.lang); loadNews(); });
                 </button>
               </li>
               <li>
                 <button class="dropdown-item lang-option" data-lang="sr">
-                  Srpski
+        btn.addEventListener("click", () => { setLang(btn.dataset.lang); loadNews(); });
                 </button>
               </li>
             </ul>
@@ -126,16 +126,12 @@
       crossorigin="anonymous"
     ></script>
     <script src="../config.js"></script>
+    <script src="../lang.js"></script>
     <script src="../theme.js"></script>
     <script src="../app.js"></script>
     <script src="../site.js"></script>
 
     <script>
-      function setLang(lang) {
-        SiteLang.set(lang);
-        updateLangDropdownDisplay();
-        loadNews();
-      }
       const UI_STRINGS = {
         en: {
           externalLink: "Open Original Article",
@@ -162,13 +158,8 @@
           copied: "Kopirano!",
         },
       };
-      function updateLangDropdownDisplay() {
-        const current = SiteLang.get();
-        const toggle = document.getElementById("langDropdown");
-        toggle.innerHTML = `<i class="bi bi-translate"></i> ${LANG_LABELS[current]}`;
-      }
       document.querySelectorAll(".lang-option").forEach((btn) => {
-        btn.addEventListener("click", () => setLang(btn.dataset.lang));
+        btn.addEventListener("click", () => { setLang(btn.dataset.lang); loadNews(); });
       });
       updateLangDropdownDisplay();
 
