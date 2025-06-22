@@ -94,10 +94,14 @@
       document.getElementById("languageSwitcher").value = getLang();
       document
         .getElementById("languageSwitcher")
-          .addEventListener("change", (e) => {
-            setLang(e.target.value);
-            location.reload();
-          });
+        .addEventListener("change", (e) => {
+          setLang(e.target.value);
+        });
+
+      function refreshPinsLanguage() {
+        fetchPins();
+      }
+      window.refreshPinsLanguage = refreshPinsLanguage;
 
       function showAlert(type, msg) {
         const container = document.getElementById("alertContainer");
