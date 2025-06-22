@@ -15,6 +15,16 @@ function setTheme(theme) {
       sidebar.classList.add("bg-dark");
     }
   }
+  const modal = document.getElementById("modalc");
+  if (modal) {
+    modal.classList.remove("bg-light", "bg-dark");
+    if (theme === "light") {
+      modal.classList.add("bg-light");
+    } else if (theme === "dark") {
+      modal.classList.add("bg-dark");
+    }
+  }
+
   // 4) Update logout button (“logbuton”)
   const logBtn = document.getElementById("logbuton");
   if (logBtn) {
