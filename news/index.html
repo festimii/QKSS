@@ -25,7 +25,7 @@
             height="40"
             class="me-2"
           />
-          <span>QKSS Map</span>
+          <span id="siteTitle"></span>
         </a>
         <button
           class="navbar-toggler"
@@ -111,7 +111,7 @@
     </main>
 
     <footer class="text-center py-2 mt-auto">
-      <small
+      <small id="footerText"
         >This site is part of a project supported by NED (National Endowment for
         Democracy), titled 'Increasing Government Transparency and
         Accountability in Interethnic Dialogue,' and implemented by KCSS. The
@@ -127,16 +127,13 @@
     ></script>
     <script src="../config.js"></script>
     <script src="../theme.js"></script>
+    <script src="../site.js"></script>
     <script>
-      function getLang() {
-        return localStorage.getItem("lang") || "en";
-      }
       function setLang(lang) {
-        localStorage.setItem("lang", lang);
+        SiteLang.set(lang);
         updateLangDropdownDisplay();
         loadNews();
       }
-      const LANG_LABELS = { en: "English", sq: "Shqip", sr: "Srpski" };
       const UI_STRINGS = {
         en: {
           externalLink: "Open Original Article",
@@ -164,7 +161,7 @@
         },
       };
       function updateLangDropdownDisplay() {
-        const current = getLang();
+        const current = SiteLang.get();
         const toggle = document.getElementById("langDropdown");
         toggle.innerHTML = `<i class="bi bi-translate"></i> ${LANG_LABELS[current]}`;
       }
@@ -181,7 +178,7 @@
           const res = await fetch(`${API_BASE_URL}/pins/${id}`);
           if (!res.ok) throw new Error("Failed to load news");
           const pin = await res.json();
-          const lang = getLang();
+          const lang = SiteLang.get();
           const city = pin.city || {};
           const title =
             (pin.title && pin.title[lang]) || pin.title?.en || pin.title || "";
@@ -198,7 +195,7 @@
           ).textContent = `${pin.lat}, ${pin.lng}`;
           document.getElementById("newsCategory").textContent =
             pin.city || "N/A";
-          const u = UI_STRINGS[getLang()];
+          const u = UI_STRINGS[SiteLang.get()];
           document.getElementById("externalLink").textContent = u.externalLink;
           document.getElementById("externalLink").href = pin.articleUrl || "#";
           document.querySelector("a.btn-secondary").textContent = u.back;
@@ -215,7 +212,7 @@
       window.addEventListener("DOMContentLoaded", loadNews);
 
       function copyNewsLink() {
-        const u = UI_STRINGS[getLang()];
+        const u = UI_STRINGS[SiteLang.get()];
         navigator.clipboard.writeText(window.location.href).then(() => {
           const btn = document.activeElement;
           if (btn && btn.tagName === "BUTTON") {
