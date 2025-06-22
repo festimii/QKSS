@@ -36,7 +36,13 @@ const SiteLang = {
 };
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".lang-option").forEach((btn) => {
-    btn.addEventListener("click", () => SiteLang.set(btn.dataset.lang));
+    btn.addEventListener("click", () => {
+      if (typeof window.setLang === "function") {
+        window.setLang(btn.dataset.lang);
+      } else {
+        SiteLang.set(btn.dataset.lang);
+      }
+    });
   });
   SiteLang.apply();
 });
