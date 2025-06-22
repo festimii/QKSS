@@ -33,3 +33,13 @@ window.LANG_LABELS = LANG_LABELS;
 window.getLang = getLang;
 window.setLang = setLang;
 window.updateLangDropdownDisplay = updateLangDropdownDisplay;
+window.addEventListener("storage", (e) => {
+  if (e.key === "lang") {
+    updateLangDropdownDisplay();
+    if (window.SiteLang && typeof window.SiteLang.apply === "function") {
+      window.SiteLang.apply();
+    }
+    if (typeof updateLanguageUI === "function") updateLanguageUI();
+    if (typeof updateUIStrings === "function") updateUIStrings();
+  }
+});
