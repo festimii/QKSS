@@ -13,7 +13,8 @@ const UI_STRINGS = {
     coordsLabel: "Coordinates:",
     categoryLabel: "Category:",
     cityLabel: "Location:",
-    footerText: "Implemented by KCSS | Supported by NED",
+    footerText:
+      "Implemented by KCSS | Supported by NED (National Endowment for Democracy)  ",
     navBrand: "Pin Admin",
     navLogout: "Logout",
     formHeading: "Create New Pin",
@@ -54,7 +55,8 @@ const UI_STRINGS = {
     coordsLabel: "Koordinatat:",
     categoryLabel: "Kategoria:",
     cityLabel: "Vendndodhja:",
-    footerText: "Implemented by KCSS | Supported by NED",
+    footerText:
+      "Implementuar nga KCSS | Mbështetur nga NED (National Endowment for Democracy)",
     navBrand: "Admin Pikash",
     navLogout: "Dil",
     formHeading: "Krijo Pikë të Re",
@@ -95,7 +97,8 @@ const UI_STRINGS = {
     coordsLabel: "Koordinate:",
     categoryLabel: "Kategorija:",
     cityLabel: "Lokacija:",
-    footerText: "Implemented by KCSS | Supported by NED",
+    footerText:
+      "Implementirano od strane KCSS | Podržano od strane NED (National Endowment for Democracy)",
     navBrand: "Admin Pinova",
     navLogout: "Odjavi se",
     formHeading: "Kreiraj Novi Pin",
@@ -329,7 +332,13 @@ function setupFilterControls() {
         mode: "range",
         dateFormat: "Y-m",
         defaultDate: [currentMonthStart, currentMonthStart],
-        plugins: [monthSelectPlugin({ shorthand: true, dateFormat: "Y-m", altFormat: "F Y" })],
+        plugins: [
+          monthSelectPlugin({
+            shorthand: true,
+            dateFormat: "Y-m",
+            altFormat: "F Y",
+          }),
+        ],
       })
     : null;
 
@@ -337,7 +346,11 @@ function setupFilterControls() {
     if (fp && fp.selectedDates.length) {
       const startMonth = fp.selectedDates[0];
       const endMonth = fp.selectedDates[1] || fp.selectedDates[0];
-      startFilter = new Date(startMonth.getFullYear(), startMonth.getMonth(), 1);
+      startFilter = new Date(
+        startMonth.getFullYear(),
+        startMonth.getMonth(),
+        1
+      );
       endFilter = new Date(endMonth.getFullYear(), endMonth.getMonth() + 1, 0);
     } else {
       startFilter = null;
@@ -390,7 +403,6 @@ function setupFilterControls() {
       }
 
       filterPins();
-
     });
   }
 
@@ -452,7 +464,6 @@ function updateUIStrings() {
   document
     .getElementById("searchInput")
     .setAttribute("placeholder", u.searchPlaceholder);
-
 
   document.getElementById("pinModalTitle").textContent = u.pinDetailsTitle;
   const cityLbl = document.getElementById("cityLabel");

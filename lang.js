@@ -13,8 +13,6 @@ const UI_STRINGS = {
     pinDetailsTitle: "Pin Details",
     coordsLabel: "Coordinates:",
     categoryLabel: "Category:",
-    footerText: "© 2025 QKSS Map Viewer. Data sourced from our API.",
-
     navBrand: "Pin Admin",
     navLogout: "Logout",
     formHeading: "Create New Pin",
@@ -54,8 +52,6 @@ const UI_STRINGS = {
     pinDetailsTitle: "Detajet e Pikës",
     coordsLabel: "Koordinatat:",
     categoryLabel: "Kategoria:",
-    footerText: "© 2025 Pamje Harta QKSS. të dhënat nga API-ja jonë.",
-
     navBrand: "Admin Pikash",
     navLogout: "Dil",
     formHeading: "Krijo Pikë të Re",
@@ -95,8 +91,6 @@ const UI_STRINGS = {
     pinDetailsTitle: "Detalji Pin-a",
     coordsLabel: "Koordinate:",
     categoryLabel: "Kategorija:",
-    footerText: "© 2025 QKSS Pregled Karte. Podaci sa našeg API-ja.",
-
     navBrand: "Admin Pinova",
     navLogout: "Odjavi se",
     formHeading: "Kreiraj Novi Pin",

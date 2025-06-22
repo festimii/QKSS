@@ -1,19 +1,20 @@
-const LANG_LABELS = { en: "English", sq: "Shqip", sr: "Srpski" };
 const SITE_STRINGS = {
   en: {
-    title: "QKSS Map",
+    title: "Online Risk Monitor Platform on Interethnic Events in Kosovo",
     footer:
-      "This site is part of a project supported by NED (National Endowment for Democracy), titled 'Increasing Government Transparency and Accountability in Interethnic Dialogue,' and implemented by KCSS. The authors wrote the specific chapters within their own capacities. As such, the views presented in this site do not necessarily reflect the views of KCSS or NED.",
+      "Implemented by KCSS | Supported by NED (National Endowment for Democracy)  ",
   },
   sq: {
-    title: "Harta e QKSS",
+    title:
+      "Platforma Online e Monitorimit të Rrezikut për Ngjarjet Ndëretnike në Kosovë",
     footer:
-      "Kjo faqe është pjesë e një projekti të mbështetur nga NED (National Endowment for Democracy), të titulluar 'Rritja e Transparencës së Qeverisë dhe Llogaridhënies në Dialogun Ndëretnik', dhe zbatohet nga KCSS. Autorët kanë shkruar kapitujt përkatës në kapacitetet e tyre personale. Prandaj, pikëpamjet e shprehura në këtë faqe nuk pasqyrojnë domosdoshmërisht pikëpamjet e KCSS ose NED.",
+      "Implementuar nga KCSS | Mbështetur nga NED (National Endowment for Democracy)",
   },
   sr: {
-    title: "KCSS Mapa",
+    title:
+      "Onlajn platforma za praćenje rizika od međunacionalnih događaja na Kosovu",
     footer:
-      "Ovaj sajt je deo projekta koji podržava NED (National Endowment for Democracy) pod nazivom 'Povećanje transparentnosti vlade i odgovornosti u međuetničkom dijalogu', a sprovodi ga KCSS. Autori su pisali pojedina poglavlja u ličnom kapacitetu, pa stavovi izneti na ovom sajtu ne odražavaju nužno stavove KCSS-a ili NED-a.",
+      "Implementirano od strane KCSS | Podržano od strane NED (National Endowment for Democracy)",
   },
 };
 const SiteLang = {
