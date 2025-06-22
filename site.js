@@ -1,18 +1,16 @@
 const SITE_STRINGS = {
   en: {
-    title: "Online Risk Monitor Platform on Interethnic Events in Kosovo",
+    title: "KoRelate: Kosovo Interethnic Relations Monitor",
     footer:
       "Implemented by KCSS | Supported by NED (National Endowment for Democracy)  ",
   },
   sq: {
-    title:
-      "Platforma Online e Monitorimit të Rrezikut për Ngjarjet Ndëretnike në Kosovë",
+    title: "KoRelate: Monitori i marrëdhënieve ndëretnike në Kosovë",
     footer:
       "Implementuar nga KCSS | Mbështetur nga NED (National Endowment for Democracy)",
   },
   sr: {
-    title:
-      "Onlajn platforma za praćenje rizika od međunacionalnih događaja na Kosovu",
+    title: "KoRelate: Monitor međunacionalnih odnosa na Kosovu",
     footer:
       "Implementirano od strane KCSS | Podržano od strane NED (National Endowment for Democracy)",
   },
