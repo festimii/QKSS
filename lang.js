@@ -19,6 +19,7 @@ function setLang(lang) {
   }
   if (typeof updateLanguageUI === "function") updateLanguageUI();
   if (typeof updateUIStrings === "function") updateUIStrings();
+  if (typeof refreshPinsLanguage === "function") refreshPinsLanguage();
 }
 
 function updateLangDropdownDisplay() {
@@ -41,5 +42,6 @@ window.addEventListener("storage", (e) => {
     }
     if (typeof updateLanguageUI === "function") updateLanguageUI();
     if (typeof updateUIStrings === "function") updateUIStrings();
+    if (typeof refreshPinsLanguage === "function") refreshPinsLanguage();
   }
 });
