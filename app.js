@@ -1,8 +1,3 @@
-const LANG_LABELS = {
-  en: "English",
-  sq: "Shqip",
-  sr: "Srpski",
-};
 const UI_STRINGS = {
   en: {
     locations: "Locations",
@@ -136,22 +131,6 @@ let map;
 let markers = [];
 let allPins = [];
 
-function getLang() {
-  return localStorage.getItem("lang") || "en";
-}
-
-function setLang(lang) {
-  localStorage.setItem("lang", lang);
-  updateLangDropdownDisplay();
-  updateUIStrings();
-  addMarkers(allPins);
-  populateList(allPins);
-}
-function updateLangDropdownDisplay() {
-  const current = getLang();
-  const toggle = document.getElementById("langDropdown");
-  toggle.innerHTML = `<i class="bi bi-translate"></i> ${LANG_LABELS[current]}`;
-}
 
 function normalizePinTitle(pin) {
   if (typeof pin.title === "string") {
