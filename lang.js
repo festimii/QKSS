@@ -1,10 +1,4 @@
-const LANG_LABELS = {
-  en: "English",
-  sq: "Shqip",
-  sr: "Srpski",
-};
-
-const UI_STRINGS = {
+UI_STRINGS = {
   en: {
     locations: "Locations",
     searchPlaceholder: "Filter by title...",
