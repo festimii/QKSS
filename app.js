@@ -462,12 +462,15 @@ async function init() {
 function updateUIStrings() {
   const u = UI_STRINGS[getLang()];
 
-  document.querySelector("#sidebar h5").textContent = u.locations + " ";
-  document
-    .getElementById("searchInput")
-    .setAttribute("placeholder", u.searchPlaceholder);
+  const sidebarTitle = document.querySelector("#sidebar h5");
+  if (sidebarTitle) sidebarTitle.textContent = u.locations + " ";
 
-  document.getElementById("pinModalTitle").textContent = u.pinDetailsTitle;
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput)
+    searchInput.setAttribute("placeholder", u.searchPlaceholder);
+
+  const modalTitle = document.getElementById("pinModalTitle");
+  if (modalTitle) modalTitle.textContent = u.pinDetailsTitle;
   const cityLbl = document.getElementById("cityLabel");
   if (cityLbl) cityLbl.textContent = u.cityLabel;
   const catLbl = document.getElementById("categoryLabel");
@@ -492,33 +495,50 @@ function updateUIStrings() {
   if (dateLbl) dateLbl.textContent = u.dateRangeLabel;
   const clearBtn = document.getElementById("clearFilters");
   if (clearBtn) clearBtn.textContent = u.clearFilters;
-  document
-    .querySelector("#pinModal .btn-close")
-    .setAttribute("aria-label", u.close);
-  document.querySelector("footer small").textContent = u.footerText;
+  const closeBtn = document.querySelector("#pinModal .btn-close");
+  if (closeBtn) closeBtn.setAttribute("aria-label", u.close);
+
+  const footerSmall = document.querySelector("footer small");
+  if (footerSmall) footerSmall.textContent = u.footerText;
 }
 function updateCreateFormStrings() {
   const u = UI_STRINGS[getLang()];
 
-  document.querySelector("h4").textContent = u.createPinTitle;
-  document.querySelector("p.text-muted").textContent = u.clickMapHelper;
+  const heading = document.querySelector("h4");
+  if (heading) heading.textContent = u.createPinTitle;
 
-  document.querySelector('label[for="title_en"]').textContent = u.labelTitleEn;
-  document.querySelector('label[for="title_sq"]').textContent = u.labelTitleSq;
-  document.querySelector('label[for="title_sr"]').textContent = u.labelTitleSr;
+  const subheading = document.querySelector("p.text-muted");
+  if (subheading) subheading.textContent = u.clickMapHelper;
 
-  document.querySelector('label[for="desc_en"]').textContent = u.labelDescEn;
-  document.querySelector('label[for="desc_sq"]').textContent = u.labelDescSq;
-  document.querySelector('label[for="desc_sr"]').textContent = u.labelDescSr;
+  const labelTitleEn = document.querySelector('label[for="title_en"]');
+  if (labelTitleEn) labelTitleEn.textContent = u.labelTitleEn;
+  const labelTitleSq = document.querySelector('label[for="title_sq"]');
+  if (labelTitleSq) labelTitleSq.textContent = u.labelTitleSq;
+  const labelTitleSr = document.querySelector('label[for="title_sr"]');
+  if (labelTitleSr) labelTitleSr.textContent = u.labelTitleSr;
+
+  const labelDescEn = document.querySelector('label[for="desc_en"]');
+  if (labelDescEn) labelDescEn.textContent = u.labelDescEn;
+  const labelDescSq = document.querySelector('label[for="desc_sq"]');
+  if (labelDescSq) labelDescSq.textContent = u.labelDescSq;
+  const labelDescSr = document.querySelector('label[for="desc_sr"]');
+  if (labelDescSr) labelDescSr.textContent = u.labelDescSr;
 
   const catLabel = document.querySelector('label[for="category"]');
   if (catLabel) catLabel.textContent = u.labelCategory;
-  document.querySelector('label[for="city"]').textContent = u.labelCity;
-  document.querySelector('label[for="lat"]').textContent = u.labelLat;
-  document.querySelector('label[for="lng"]').textContent = u.labelLng;
-  document.querySelector('label[for="url"]').textContent = u.labelUrl;
 
-  document.querySelector('button[type="submit"]').textContent = u.btnSubmit;
-  document.querySelector("a.btn-secondary").textContent = u.btnBack;
+  const cityLabel = document.querySelector('label[for="city"]');
+  if (cityLabel) cityLabel.textContent = u.labelCity;
+  const latLabel = document.querySelector('label[for="lat"]');
+  if (latLabel) latLabel.textContent = u.labelLat;
+  const lngLabel = document.querySelector('label[for="lng"]');
+  if (lngLabel) lngLabel.textContent = u.labelLng;
+  const urlLabel = document.querySelector('label[for="url"]');
+  if (urlLabel) urlLabel.textContent = u.labelUrl;
+
+  const submitBtn = document.querySelector('button[type="submit"]');
+  if (submitBtn) submitBtn.textContent = u.btnSubmit;
+  const backLink = document.querySelector("a.btn-secondary");
+  if (backLink) backLink.textContent = u.btnBack;
 }
 window.onload = init;
