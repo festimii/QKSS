@@ -17,7 +17,7 @@ Simple Pin Viewer Webpage for creating and viewing geolocated news. The main das
 ## Features
 
 - 📍 Display latest accident news as map pins
- - 🔎 Clickable markers with title and “Read more” links to a detail page
+- 🔎 Clickable markers with title and “Read more” links to a detail page
 - 📋 Sidebar list view of all pins
 - 🗒️ Search now matches pin descriptions
 - 📅 Filter pins by month range
@@ -30,20 +30,6 @@ Simple Pin Viewer Webpage for creating and viewing geolocated news. The main das
 - **Frontend**: HTML, JavaScript, [Bootstrap 5](https://getbootstrap.com/)
 - **Backend**: Java Spring Boot REST API
 - **API Base URL**: `https://imap.qkss.org/api/`
-
-## Installation
-
-1. **Clone the repo**
-   ```bash
-   git clone https://github.com/festimii/QKSS.git
-   cd QKSS
-   ```
-   Open `index.html` in your browser for the main site.
-   The admin interface is served from the `admin/` directory.
-
-2. **Build Backend**
-   ./mvnw clean package
-   java -jar target/map-0.0.1-SNAPSHOT.jar
 
 # AUTHORS
 

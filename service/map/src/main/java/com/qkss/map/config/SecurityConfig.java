@@ -46,7 +46,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/pins/admin/**").permitAll()
 
                         // 3g) Permit PUT /api/pins/admin/{id}
-                        .requestMatchers(HttpMethod.PUT, "/api/pins/admin/**").permitAll(),
+                        .requestMatchers(HttpMethod.PUT, "/api/pins/admin/**").permitAll()
 
                         // 3h) Deny everything else
                         .anyRequest().denyAll()
