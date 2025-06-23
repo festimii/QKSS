@@ -72,7 +72,8 @@
             <th>Lat</th>
             <th>Lng</th>
             <th>URL</th>
-            <th style="width: 100px">Actions</th>
+            <th>Delete</th>
+            <th>Edit</th>
           </tr>
         </thead>
         <tbody id="pinTableBody"></tbody>
@@ -89,7 +90,6 @@
 
     <script>
       const PINS_API_URL = `${API_BASE_URL}/pins`;
-
 
       document.getElementById("languageSwitcher").value = getLang();
       document
@@ -196,22 +196,23 @@
           <td>${pin.lng}</td>
           <td><a href="${pin.articleUrl}" target="_blank">Link</a></td>
           <td>
-            <button class="btn btn-primary btn-sm me-1" onclick="editPin('${pin.id}')">
-              Edit
-            </button>
             <button class="btn btn-danger btn-sm" onclick="deletePin('${pin.id}')">
               Delete
+            </button>
+          
+          </td>
+          <td>
+              <button class="btn btn-primary btn-sm" onclick="editPin('${pin.id}')">
+              Edit
             </button>
           </td>
         `;
           tbody.appendChild(row);
         });
-
       }
-        function editPin(id) {
-          window.location.href = `editpin/?id=${id}`;
-        }
-
+      function editPin(id) {
+        window.location.href = `editpin/?id=${id}`;
+      }
 
       async function deletePin(id) {
         let token;
