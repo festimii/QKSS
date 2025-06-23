@@ -1,6 +1,3 @@
-/**
- * Shared language utilities used across the QKSS site.
- */
 const LANG_LABELS = {
   en: "English",
   sq: "Shqip",
@@ -25,11 +22,12 @@ function setLang(lang) {
 function updateLangDropdownDisplay() {
   const toggle = document.getElementById("langDropdown");
   if (toggle) {
-    toggle.innerHTML = `<i class="bi bi-translate"></i> ${LANG_LABELS[getLang()]}`;
+    toggle.innerHTML = `<i class="bi bi-translate"></i> ${
+      LANG_LABELS[getLang()]
+    }`;
   }
 }
 
-// expose helpers globally
 window.LANG_LABELS = LANG_LABELS;
 window.getLang = getLang;
 window.setLang = setLang;

@@ -61,31 +61,27 @@ a:hover {
   border-color: var(--navbar-link) !important;
 }
 
-/* Ensure navbar buttons are legible on hover in light mode */
 [data-bs-theme="light"] .navbar .btn:hover {
   background-color: var(--navbar-link) !important;
   color: #fff !important;
   border-color: var(--navbar-link) !important;
 }
 
-/* 3. Optional search bar (only if you have one above the map) */
 #searchBar {
   flex: 0 0 var(--search-height);
 }
 
-/* 4. Main layout holds the map (and pin list) */
 .main-layout {
-  flex: 1; /* take remaining space */
-  position: relative; /* for absolute children if needed */
+  flex: 1;
+  position: relative;
   display: flex;
   flex-direction: column;
 }
 
-/* 5. Map expands to fill its parent */
 #map {
   flex: 1;
   width: 100%;
-  height: 100%; /* redundant with flex:1 but safe */
+  height: 100%;
   animation: fadeIn 0.5s ease-in;
 }
 
@@ -98,7 +94,6 @@ a:hover {
   }
 }
 
-/* 6. Pin list hover/active styling */
 #pinList li:hover,
 #pinList li:active {
   cursor: pointer;
@@ -111,20 +106,17 @@ a:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* 7. Safe-area support (iPhone notch, etc.) */
 body {
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* 8. Tweak for very small screens */
 @media (max-width: 576px) {
   :root {
-    --search-height: 50px; /* smaller on tiny phones */
+    --search-height: 50px;
   }
 }
 
-/* Enhanced modal styling */
 #pinModal .modal-header {
   background-color: #f8f9fa;
   border-bottom: none;
@@ -138,21 +130,18 @@ body {
   font-size: 1.1rem;
 }
 
-/* Wider modal on large screens */
 @media (min-width: 992px) {
   #pinModal .modal-dialog {
     max-width: 900px;
   }
 }
 
-/* Mobile tweaks */
 @media (max-width: 576px) {
   #pinModal .modal-dialog {
     margin: 1rem;
   }
 }
 
-/* News page */
 .news-card {
   max-width: 860px;
 }
@@ -162,13 +151,11 @@ footer {
   color: var(--main-text) !important;
 }
 
-/* Dark theme list groups */
 [data-bs-theme="dark"] .list-group-item {
   background-color: #343a40;
   color: var(--main-text);
 }
 
-/* Ensure outline-dark buttons remain visible in dark mode */
 [data-bs-theme="dark"] [class*="btn-outline-"] {
   color: var(--main-text) !important;
   border-color: var(--main-text) !important;

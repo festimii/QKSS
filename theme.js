@@ -1,11 +1,8 @@
 const THEMES = ["light", "dark"];
 
 function setTheme(theme) {
-  // 1) Apply BS data-theme & persist
   document.documentElement.setAttribute("data-bs-theme", theme);
   localStorage.setItem("theme", theme);
-
-  // 2) Theme the sidebar
   const sidebar = document.getElementById("sidebar");
   if (sidebar) {
     sidebar.classList.remove("bg-light", "bg-dark");
@@ -25,30 +22,25 @@ function setTheme(theme) {
     }
   }
 
-  // 4) Update logout button (“logbuton”)
   const logBtn = document.getElementById("logbuton");
   if (logBtn) {
-    // remove any old outline classes
     logBtn.classList.remove(
       "btn-outline-dark",
       "btn-outline-light",
       "btn-outline-primary"
     );
-    // re-apply the correct outline for each theme
+
     if (theme === "light") {
       logBtn.classList.add("btn-outline-dark");
     } else if (theme === "dark") {
       logBtn.classList.add("btn-outline-light");
     } else {
-      // qkss
       logBtn.classList.add("btn-outline-primary");
     }
-    // ensure the btn and size class remain
     if (!logBtn.classList.contains("btn")) logBtn.classList.add("btn");
     if (!logBtn.classList.contains("btn-sm")) logBtn.classList.add("btn-sm");
   }
 
-  // 3) Update toggle button
   const btn = document.getElementById("themeToggle");
   if (!btn) return;
 
