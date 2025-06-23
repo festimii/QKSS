@@ -118,6 +118,35 @@ public class PinServiceImpl implements PinService {
     }
 
     @Override
+    public PinDTO updatePin(String id, CreatePinDTO dto) {
+        Pin pin = pinRepository.findById(id)
+                .orElseThrow(() -> new PinNotFoundException("Pin not found with id: " + id));
+
+        pin.setTitle(dto.getTitle());
+        pin.setDescription(dto.getDescription());
+        pin.setCategory(dto.getCategory());
+        pin.setLat(dto.getLat());
+        pin.setLng(dto.getLng());
+        pin.setCity(dto.getCity());
+        pin.setArticleUrl(dto.getArticleUrl());
+        pin.setTimestamp(dto.getTimestamp());
+
+        Pin saved = pinRepository.save(pin);
+
+        return new PinDTO(
+                saved.getId(),
+                saved.getTitle(),
+                saved.getDescription(),
+                saved.getCategory(),
+                saved.getLat(),
+                saved.getLng(),
+                saved.getCity(),
+                saved.getArticleUrl(),
+                saved.getTimestamp()
+        );
+    }
+
+    @Override
     public void deletePin(String id) {
         Pin pin = pinRepository.findById(id)
                 .orElseThrow(() -> new PinNotFoundException("Pin not found with id: " + id));

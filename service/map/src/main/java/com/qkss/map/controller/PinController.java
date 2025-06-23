@@ -75,6 +75,23 @@ public class PinController {
         return ResponseEntity.ok(service.createPin(dto));
     }
 
+    // 3b) Update pin by ID
+    @PutMapping("/admin/{id}")
+    public ResponseEntity<PinDTO> update(
+            @PathVariable String id,
+            @RequestBody @Valid CreatePinDTO dto,
+            @RequestHeader(value = "Authorization", required = false) String authHeader
+    ) {
+        System.out.println(">>> Received PUT /api/pins/admin/" + id + ", Authorization = " + authHeader);
+
+        if (!isTokenValid(authHeader)) {
+            System.out.println(">>> isTokenValid returned FALSE");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        System.out.println(">>> isTokenValid returned TRUE");
+        return ResponseEntity.ok(service.updatePin(id, dto));
+    }
+
     // 4) Delete pin by ID
     @DeleteMapping("/admin/{id}")
     public ResponseEntity<Void> delete(

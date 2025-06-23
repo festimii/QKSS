@@ -20,6 +20,12 @@ public interface PinService {
     PinDTO createPin(CreatePinDTO createPinDTO);
 
     /**
+     * Update the pin with the given id using the provided DTO and return
+     * the updated DTO.
+     */
+    PinDTO updatePin(String id, CreatePinDTO updateDto);
+
+    /**
      * Retrieve a single pin by id or throw if not found.
      */
     PinDTO getPin(String id);

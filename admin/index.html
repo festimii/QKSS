@@ -196,6 +196,9 @@
           <td>${pin.lng}</td>
           <td><a href="${pin.articleUrl}" target="_blank">Link</a></td>
           <td>
+            <button class="btn btn-primary btn-sm me-1" onclick="editPin('${pin.id}')">
+              Edit
+            </button>
             <button class="btn btn-danger btn-sm" onclick="deletePin('${pin.id}')">
               Delete
             </button>
@@ -203,7 +206,12 @@
         `;
           tbody.appendChild(row);
         });
+
       }
+        function editPin(id) {
+          window.location.href = `editpin/?id=${id}`;
+        }
+
 
       async function deletePin(id) {
         let token;

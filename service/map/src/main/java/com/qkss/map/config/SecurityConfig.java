@@ -45,7 +45,10 @@ public class SecurityConfig {
                         // 3f) Permit DELETE /api/pins/admin/{id}
                         .requestMatchers(HttpMethod.DELETE, "/api/pins/admin/**").permitAll()
 
-                        // 3g) Deny everything else
+                        // 3g) Permit PUT /api/pins/admin/{id}
+                        .requestMatchers(HttpMethod.PUT, "/api/pins/admin/**").permitAll(),
+
+                        // 3h) Deny everything else
                         .anyRequest().denyAll()
                 )
 
@@ -68,7 +71,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration cfg = new CorsConfiguration();
         cfg.setAllowedOriginPatterns(List.of("*"));
-        cfg.setAllowedMethods(List.of("GET", "POST", "DELETE", "OPTIONS"));
+        cfg.setAllowedMethods(List.of("GET", "POST", "DELETE", "PUT", "OPTIONS"));
         cfg.setAllowedHeaders(List.of(
                 "Authorization",
                 "Content-Type",
